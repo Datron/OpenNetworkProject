@@ -30,7 +30,6 @@
     <!--My Scripts -->
         <style>
             body {
-                padding: 2px;
                 background-color: #27ae60;
             }
             .mainNav {
@@ -56,11 +55,15 @@
                 color: white;
                 border-radius: 20px;
             }
+            .biarro_description {
+                margin-top: 60px;
+            }
             .main {
                 margin-top: 100px;
             }
             .features {
                 background-color: white;
+                height: 100%;
             }
             .featureHeading {
                 font-family: 'Roboto',sans-serif;
@@ -93,11 +96,11 @@
                 <form action="login.php" method="POST" class="form-inline navbar-form navbar-right" role="form">
 
 	               <div class="form-group">
-		              <input type="email" class="form-control form-field" id="user_login_mail" placeholder="enter email ID" required>
-                       <input type="password" class="form-control form-field" id="userpass" placeholder="password" required>
+		              <input type="email" class="form-control form-field" id="user_login_mail" placeholder="enter email ID" name="userlogin" required>
+                       <input type="password" class="form-control form-field" id="userpass" placeholder="password" name="password" required>
 	               </div>
 
-                <button type="submit" class="btn btn-biarro"> Login in</button>
+                <button type="submit" class="btn btn-biarro"> Login</button>
                 </form>
 
             </div>
@@ -111,20 +114,19 @@
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                 <div class="biarro_description">
                     <h2 class="navHeading">myBiarro is the social network<br> to connect to neighbours and to find out <br> what's happening in your neighbourhood.</h2>
-                    <p> placeholder text </p>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <form action="signup.php" method="POST" class="form-horizontal" role="form">
 		          <div class="form-group">
 			         <legend><h2 class="navHeading">Sign Up</h2></legend>
-                      <input type="text" class="form-control form-field" placeholder="First Name" id="firstName" required>
+                      <input type="text" class="form-control form-field" placeholder="First Name" id="firstName" name="firstname" required>
                       <br>
-                      <input type="text" class="form-control form-field" placeholder="Last Name" id="lastName" required>
+                      <input type="text" class="form-control form-field" placeholder="Last Name" id="lastName" name="lastname" required>
                       <br>
-                      <input type="text" class="form-control form-field" placeholder="email ID" id="emailId" required>
+                      <input type="text" class="form-control form-field" placeholder="email ID" id="emailId" name="email" required>
                       <br>
-                      <input type="text" class="form-control form-field" placeholder="Neighbourhood" id="Neighbourhood" required>
+                      <input type="text" class="form-control form-field" placeholder="Neighbourhood" id="Neighbourhood" name="neighborhood" required>
 		          </div>
                 <div class="form-group">
 			     <div class="col-sm-10 col-sm-offset-2">
