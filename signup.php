@@ -33,14 +33,13 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
 ?>
 <html DOCTYPE!>
     <head>
-    <title>myBiarro - The social network for your neigbourhood|Sign in page</title>
+    <title>myBairro - The social network for your neigbourhood|Sign in page</title>
     <meta charset="utf-8">
     <meta lang="en">
     <!---------------- SEO --------------------------->
-    
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
-	<meta name="author" content="developed by Kartik Gajendra and Saahith hegde" />
+	<meta name="author" content="developed by Kartik Gajendra" />
 	<meta property="og:title" content=""/>
 	<meta property="og:description" content=""/>
 	<meta property="og:url" content=""/>
@@ -56,7 +55,28 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+    function checkPasswordMatch() {
+    var password = $("#password").val();
+    var confirmPassword = $("#rpassword").val();
+
+    if (password != confirmPassword)
+        $("#check").html('<i class="glyphicon glyphicon-remove" id="checkwrong"></i>');
+    else
+        $("#check").html('<i class="glyphicon glyphicon-ok" id="checkok"></i>');
+}
+
+    $(document).ready(function () {
+       $("#password, #rpassword").keyup(checkPasswordMatch);
+    });    
+    </script>
     <style>
+        #checkok {
+            color: lawngreen;
+        }
+        #checkwrong {
+            color: red;
+        }
             .mainNav {
                 background-color: #27ae60;
                 border-radius: 0px;
@@ -95,7 +115,7 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
         <nav class="navbar mainNav">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-md-12"><h1 class="navHeading">myBiarro</h1></div>
+            <div class="col-md-12"><h1 class="navHeading">myBairro</h1></div>
             </div>
             </div>
         </nav>
@@ -108,17 +128,21 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
 			<legend>Please provide some more details</legend>
 		</div>
             <div class="form-group">
-                <input type="text" class="form-control form-field" value="<?php echo $_POST['firstname'] ?>" id="firstName" name="firstname" required>
+                <input type="text" class="form-control form-field" value="<?php if(isset($_POST['firstname'])) echo $_POST['firstname'];
+                        else echo "First Name"; ?>" id="firstName" name="firstname" required>
                       <br>
-                      <input type="text" class="form-control form-field" value="<?php echo $_POST['lastname'] ?>" id="lastName" name="lastname" required>
+                      <input type="text" class="form-control form-field" value="<?php if(isset($_POST['lastname'])) echo $_POST['lastname'];
+                        else echo "Last Name"; ?>" id="lastName" name="lastname" required>
                       <br>
-                      <input type="text" class="form-control form-field" value="<?php echo $_POST['email'] ?>" id="emailId" name="email" required>
+                      <input type="text" class="form-control form-field" value="<?php if(isset($_POST['email'])) echo $_POST['email'];
+                        else echo "Enter email ID"; ?>" id="emailId" name="email" required>
                       <br>
                     <input type="password" class="form-control form-field" placeholder="password" id="password" name="npass" required>
                       <br>
-                <input type="password" class="form-control form-field" placeholder="retype password" id="rpassword" name="rpass" required>
+                <input type="password" class="form-control form-field" placeholder="retype password" id="rpassword" name="rpass" required><i id="check"></i>
                       <br>
-                      <input type="text" class="form-control form-field" value="<?php echo $_POST['neighborhood'] ?>" id="Neighborhood" name="neighborhood" required>
+                      <input type="text" class="form-control form-field" value="<?php if(isset($_POST['neighborhood'])) echo $_POST['neighborhood'];
+                        else echo "Neigbourhood"; ?>" id="Neighborhood" name="neighborhood" required>
                       <br>
                       <input type="text" class="form-control form-field" placeholder="Address" id="sAddress" name="sAddress" required>
                     <br>
