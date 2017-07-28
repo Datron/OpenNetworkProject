@@ -1,0 +1,124 @@
+.navMenu {
+    background-image: url(/images/navMenu.jpeg);
+    background-size: contain;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Stay on top */
+    top: 0;
+    left: 0;
+    text-align: center;
+    border: 0px 2px 0px 0px white;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.navMenu a {
+    top: 30px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.navMenu a:hover {
+    color: white;
+}
+.navMenu .nav-close {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 60px;
+    margin-left: 50px;
+}
+.mat-menu {
+    color: white;
+    font-size: 60px;
+}
+.mainNav {
+    background-color: #27ae60;
+    border-radius:  0px;
+    box-shadow: 1px 5px grey;
+}
+.active {
+    border-bottom: 5px solid white;
+    margin: 0px;
+    transition: 0.1s;
+}
+.tab-content {
+    position: absolute;
+}
+.nav-form {
+    position: relative;
+    margin: 10px;
+    width: 100%;
+}
+.tabs {
+    text-align: center;
+}
+.navTabs {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+.tabicon{
+    font-size: 30px;
+}
+.btn-tab {
+    background-color: transparent;
+    border: 0px;
+    padding: 4px;
+}
+.navHeading {
+    font-family: 'Pacifico',cursive;
+    margin: 2px;
+    color: white;
+}
+.form-field {
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    border-radius: 20px 0px 0px 20px;
+    height: 37px;
+    color: white;
+    z-index: 0;
+}
+.form-field:focus {
+    border: 1px solid white;
+}
+.btn-biarro {
+    background-color: #388E3C;
+    color: white;
+    height: 37px;
+    border-radius: 20px;
+}
+.biarro_description {
+    margin-top: 60px;
+}
+.main {
+    margin-top: 100px;
+}
+.features {
+    background-color: white;
+    height: 100%;
+}
+.featureHeading {
+    font-family: 'Roboto',sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+}
+.featureText {
+    font-family: 'Ubuntu',sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+
+}
+.feature {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+}
+.feature_icon {
+    font-size: 100px;
+}
