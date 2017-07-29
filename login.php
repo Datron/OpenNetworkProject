@@ -24,6 +24,7 @@ function userVerified($row){
     $_SESSION['address'] = $row->address;
     $_SESSION['phone'] = $row->phone;
     $_SESSION['neighborhood'] = $row->neighborhood;
+    $verifyquery = "UPDATE users SET isLoggedIn='1' WHERE username='$row->username'";
     header("Location: http://localhost/mybiarro/home.php"); /* Redirect browser */
     exit;
 }
