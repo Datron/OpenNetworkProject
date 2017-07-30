@@ -1,5 +1,6 @@
 $(document).ready(function(){
     //navbar events
+    var photo_set = false;
     var screen_width = $(window).width();
     var width;
     screen_width = screen_width * 0.3;
@@ -69,7 +70,7 @@ $(document).ready(function(){
         $("#submitPost").prop("disabled", true);
     }   
     }*/
-    $("#submitPost").click(function(){
+    $("#submitPost").click(function(e){
         var postText = $("#postarea").val();
         console.log(postText);
         if (postText.length == 0)
@@ -115,6 +116,42 @@ $(document).ready(function(){
             }
         }).done(function(){
             console.log("All data sent successfully:");
+        });
+        /*Submit the image too if there is one*/
+        if (photo_set == true)
+            {
+                console.log($("#fileUpload")[0]);
+                var formData = new FormData($("#fileUpload"));
+                $.ajax({
+                    url: "post.php",
+                    type: "POST",
+                    data: formData,
+                    success: function (msg) {
+                        alert(msg)
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+                e.preventDefault();
+            }
+        
+    });
+    $('#photoUpload').click(function(){
+        $('#fileUpload').click();
+        $("#postsModal").show();
+        $('#fileUpload').change(function(){
+            console.log(this.files);
+            if (this.files && this.files[0])
+                {
+                photo_set = true;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview-image').attr('src', e.target.result);
+                    $('#preview-image').css("visibility","visible");
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
         });
     });
 });

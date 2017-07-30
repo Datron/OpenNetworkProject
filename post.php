@@ -32,10 +32,33 @@ class Post {
     }
 }
 session_start();
-if(isset($_POST['text']) && isset($_POST['tags']))
+if(isset($_POST['text']) || isset($_FILES["file"]["type"]))
 {
     echo "variables recieved. All systems go.";
-    $tags_token = $_POST['tags'];
+    echo $_FILES["file"]["name"];
+    $nbhood_name = $_SESSION['neighborhood'];
+    $validextensions = array("jpeg", "jpg", "png");
+    $temporary = explode(".", $_FILES["file"]["name"]);
+    $file_extension = end($temporary);
+    if ((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")
+    ) && ($_FILES["file"]["size"] < 10000000)//Approx. 10mb files can be uploaded.
+    && in_array($file_extension, $validextensions)) {
+    if ($_FILES["file"]["error"] > 0)
+    {
+    echo "Return Code: " . $_FILES["file"]["error"];
+    }
+    else
+    {
+    $sourcePath = $_FILES['file']['tmp_name']; // Storing source path of the file in a variable
+    
+    $targetPath = "images/".$nbhood_name."/".$_FILES['file']['name']; // Target path where file is to be stored
+    move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
+    }
+    }
+    if (isset($_POST['tags']))
+        $tags_token = $_POST['tags'];
+    else 
+        $tags_token = null;
     $str;
     foreach ($tags_token as $tag)
     {
@@ -45,7 +68,9 @@ if(isset($_POST['text']) && isset($_POST['tags']))
     $post->makePost();
 }
 else
+{
+    echo $_FILES["file"]["name"];
     echo "nothing recieved";
-
+}
 
 ?>

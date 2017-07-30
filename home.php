@@ -94,7 +94,7 @@ session_start();
     <div class="tab-content" id="feed">
         <div class="panel panel-default">
           <div class="panel-heading"><?php echo $_SESSION['username'] ?> Feed</div>
-          <div class="panel-body"><?php if ($_SESSION['POST_TEXT'] != null) echo $_SESSION['POST_TEXT']; else echo "no post set"; ?></div>
+          <div class="panel-body"><?php echo $_SESSION['address'] ?></div>
         </div>
         </div>
     <div class="tab-content" id="user">
@@ -120,7 +120,7 @@ session_start();
     
     <!--------------------------POST BUTTON AND CONTENT --------------------------------------->
     <div class="container-fluid postButton">
-    <button type="button" class="btn btn-post-material" data-toggle="modal" data-target="#postsModal"><i class="material-icons">add</i></button>
+    <button type="button" class="btn btn-post-material" data-toggle="modal" data-target="#postsModal" data-backdrop="static"><i class="material-icons">add</i></button>
     </div>
     <div id="postsModal" class="modal fade" role="application">
   <div class="modal-dialog">
@@ -134,10 +134,14 @@ session_start();
       <div class="modal-body">
         <form class="form-horizontal" role="form">
 		<div class="form-group postform">
+            <img class="img-responsive" src="#" id="preview-image">
+            <br>
 			<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>
             <div class="jumbotron"></div>
             <div class="row extraTags">
-                <div class="col-sm-2"><i class="material-icons">add_a_photo</i> select photo</div>
+                <div class="col-sm-2"><button class="btn" id="photoUpload"><i class="material-icons">add_a_photo</i></button> select photo
+                <input type="file" id="fileUpload" name="upPhoto">
+                </div>
                 <div class="col-sm-10">
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
