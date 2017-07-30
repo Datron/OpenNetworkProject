@@ -39,13 +39,17 @@ session_start();
     <div id="nav-menu" class="navMenu">
     <h1 class="nav-heading">Categories</h1>
     <a href="#" class="nav-close" id="navClose"><i class="material-icons">close</i></a>
-    <a href="about.html"><h2 class="navOption"><i class="material-icons">poll</i>Recommendations</h2></a>
-    <a href="contact.html"><h2 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h2></a>
-    <a href="contact.html"><h2 class="navOption"><i class="material-icons">list</i>Lost and Found</h2></a>
+    <a href=""><h2 class="navOption"><i class="material-icons">poll</i>Recommendations</h2></a>
+    <a href=""><h2 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h2></a>
+    <a href=""><h2 class="navOption"><i class="material-icons">list</i>Lost and Found</h2></a>
     
     <h1 class="nav-heading">People</h1>
-        <a href="about.html"><h2 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h2></a>
-    <a href="contact.html"><h2 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h2></a>
+        <a href=""><h2 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h2></a>
+    <a href=""><h2 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h2></a>
+        
+    <h1 class="nav-heading">Options</h1>
+        <a href="logout.php"><h2 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h2></a>
+        
     </div>
     <!------------------------------ START OF PAGE ----------------------------------------->
 <div class="mainNav">
@@ -85,11 +89,12 @@ session_start();
     </nav> 
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
+    <!--------------------------------TAB CONTENT------------------------------------------->
     <div class="container-fluid">
     <div class="tab-content" id="feed">
         <div class="panel panel-default">
           <div class="panel-heading"><?php echo $_SESSION['username'] ?> Feed</div>
-          <div class="panel-body"><?php echo $_SESSION['address'] ?></div>
+          <div class="panel-body"><?php if ($_SESSION['POST_TEXT'] != null) echo $_SESSION['POST_TEXT']; else echo "no post set"; ?></div>
         </div>
         </div>
     <div class="tab-content" id="user">
@@ -111,5 +116,55 @@ session_start();
         </div>
         </div>
     </div>
+    <!--------------------------END OF TAB CONTENT-------------------------------------------->
+    
+    <!--------------------------POST BUTTON AND CONTENT --------------------------------------->
+    <div class="container-fluid postButton">
+    <button type="button" class="btn btn-post-material" data-toggle="modal" data-target="#postsModal"><i class="material-icons">add</i></button>
+    </div>
+    <div id="postsModal" class="modal fade" role="application">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Make a post</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+		<div class="form-group postform">
+			<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>
+            <div class="jumbotron"></div>
+            <div class="row extraTags">
+                <div class="col-sm-2"><i class="material-icons">add_a_photo</i> select photo</div>
+                <div class="col-sm-10">
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        set categories
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu tags" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Pets</a></li>
+                        <li><a href="#">Recommendations</a></li>
+                        <li><a href="#">Classifields</a></li>
+                        <!--<li role="separator" class="divider"></li>-->
+                        <li><a href="#">Events</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+		</div>
+            <div class="modal-footer">
+        <button type="button" class="btn btn-biarro" data-dismiss="modal" id="submitPost">Post</button>
+                </div>
+          </form>
+        
+      
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

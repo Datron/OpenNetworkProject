@@ -1,6 +1,7 @@
 <?php
 include 'dbconfig.php';
 session_start();
+$table = "users";
 $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
@@ -9,8 +10,10 @@ if ( isset($_POST["userlogin"]) && isset($_POST["password"]) )
 {
     $userlogin = htmlentities(stripslashes(strip_tags($_POST["userlogin"])));
     $password = $_POST["password"];
+    lockTableWrite($table,$mysqli);
     $query = "SELECT username,email,address,phone,neighborhood,password FROM users WHERE email='$userlogin'";
     $result = $mysqli->query($query);
+    unlockTable($mysqli);
     $row = $result->fetch_object();
     if (password_verify($password,$row->password) == 1)
         userVerified($row);
@@ -18,13 +21,17 @@ if ( isset($_POST["userlogin"]) && isset($_POST["password"]) )
         wrongCred();
 }
 function userVerified($row){
+    global $table,$mysqli;
     $_SESSION['USR_AUTH'] = TRUE;
     $_SESSION['username'] = $row->username;
     $_SESSION['email'] = $row->email;
     $_SESSION['address'] = $row->address;
     $_SESSION['phone'] = $row->phone;
     $_SESSION['neighborhood'] = $row->neighborhood;
+    lockTableRead($table,$mysqli);
     $verifyquery = "UPDATE users SET isLoggedIn='1' WHERE username='$row->username'";
+    $result1 = $mysqli->query($verifyquery);
+    unlockTable($mysqli);
     header("Location: http://localhost/mybiarro/home.php"); /* Redirect browser */
     exit;
 }

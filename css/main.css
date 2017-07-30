@@ -1,5 +1,7 @@
+body {
+    overflow-x: hidden;
+}
 .navMenu {
-    background-image: url(/images/navMenu.jpeg);
     background-size: contain;
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -39,7 +41,7 @@
 .mainNav {
     background-color: #27ae60;
     border-radius:  0px;
-    box-shadow: 1px 5px grey;
+    box-shadow: 1px 5px #E0E0E0;
 }
 .active {
     border-bottom: 5px solid white;
@@ -121,4 +123,43 @@
 }
 .feature_icon {
     font-size: 100px;
+}
+.btn-post-material {
+    margin: 20px;
+    position: fixed;
+    bottom: 10px;
+    right: 48%;
+    width: 50px;
+    height: 50px;
+    background-color: #27ae60;
+    border: 0px;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 5px 10px #E0E0E0;
+    
+}
+@media screen and (max-width:450px)
+{
+    .btn-post-material {
+        right: 40%;
+    }
+}
+.postform {
+    padding: 10px;
+}
+
+.extraTags {
+    padding: 10px;
+    margin: 10px;
+    background-color: #EEEEEE;
+}
+.tagged {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 10px;
+    float: left;
+    border-radius: 30px 30px;
+}
+.jumbotron {
+    background-color: transparent !important;
 }

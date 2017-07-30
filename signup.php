@@ -2,6 +2,7 @@
 include 'dbconfig.php';
 session_start();
 $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
+$table = 'users';
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 } 
@@ -14,8 +15,10 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
     $address = htmlentities(strip_tags(stripslashes($_POST['sAddress'].','.$_POST['cAddress'].','.$_POST['zip'])));
     $phone = htmlentities(strip_tags(stripslashes($_POST['phoneno'])));
     $hashpass = password_hash($password,PASSWORD_BCRYPT);
+    lockTableRead($table,$mysqli);
     $query = "INSERT INTO users (username,password,email,phone,address,neighborhood)
                 VALUES('$name','$hashpass','$email','$phone','$address','$neighborhood')";
+    unlockTable($mysqli);
     if ($mysqli->query($query) === TRUE) {
         $_SESSION['USR_AUTH'] = TRUE;
         $_SESSION['username'] = $name;
