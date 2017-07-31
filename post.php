@@ -32,29 +32,9 @@ class Post {
     }
 }
 session_start();
-if(isset($_POST['text']) || isset($_FILES["file"]["type"]))
+if(isset($_POST['text']))
 {
     echo "variables recieved. All systems go.";
-    echo $_FILES["file"]["name"];
-    $nbhood_name = $_SESSION['neighborhood'];
-    $validextensions = array("jpeg", "jpg", "png");
-    $temporary = explode(".", $_FILES["file"]["name"]);
-    $file_extension = end($temporary);
-    if ((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")
-    ) && ($_FILES["file"]["size"] < 10000000)//Approx. 10mb files can be uploaded.
-    && in_array($file_extension, $validextensions)) {
-    if ($_FILES["file"]["error"] > 0)
-    {
-    echo "Return Code: " . $_FILES["file"]["error"];
-    }
-    else
-    {
-    $sourcePath = $_FILES['file']['tmp_name']; // Storing source path of the file in a variable
-    
-    $targetPath = "images/".$nbhood_name."/".$_FILES['file']['name']; // Target path where file is to be stored
-    move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
-    }
-    }
     if (isset($_POST['tags']))
         $tags_token = $_POST['tags'];
     else 
@@ -64,12 +44,37 @@ if(isset($_POST['text']) || isset($_FILES["file"]["type"]))
     {
         $str = $str.$tag;
     }
-    $post = new Post($str,$_POST['text'],null,$_SESSION['username'],$_SESSION['neighborhood']);
+    /*if (isset($_FILES['upPhoto']))
+{
+    $nbhood_name = $_SESSION['neighborhood'];
+    echo "photo verified.Script executing";
+    $validextensions = array("jpeg", "jpg", "png");
+    $temporary = explode(".", $_FILES["upPhoto"]["name"]);
+    $file_extension = end($temporary);
+    if ((($_FILES["upPhoto"]["type"] == "image/png") || ($_FILES["upPhoto"]["type"] == "image/jpg") || ($_FILES["upPhoto"]["type"] == "image/jpeg")
+    ) && ($_FILES["upPhoto"]["size"] < 10000000)//Approx. 10mb files can be uploaded.
+    && in_array($file_extension, $validextensions)) {
+    if ($_FILES["upPhoto"]["error"] > 0)
+    {
+    echo "Return Code: " . $_FILES["upPhoto"]["error"];
+    }
+    else
+    {
+    $sourcePath = $_FILES['upPhoto']['tmp_name']; // Storing source path of the file in a variable
+    $targetPath = "images/".basename($_FILES['upPhoto']['name']);// Target path where file is to be stored
+    $_SESSION['photo_path'] = $targetPath;
+    move_uploaded_file($sourcePath,$targetPath); // Moving Uploaded file
+    echo "File uploaded";
+    }
+    }
+}
+else
+    echo "Failure";*/
+    $post = new Post($str,$_POST['text'],$_SESSION['photo_path'],$_SESSION['username'],$_SESSION['neighborhood']);
     $post->makePost();
 }
 else
 {
-    echo $_FILES["file"]["name"];
     echo "nothing recieved";
 }
 

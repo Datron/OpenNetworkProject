@@ -3,13 +3,19 @@ $(document).ready(function(){
     var photo_set = false;
     var screen_width = $(window).width();
     var width;
+    /*continue screen activities*/
     screen_width = screen_width * 0.3;
     if (screen_width > 200 )
             width = screen_width;
     else 
         width = "100%";
+    
+    
     $(".tab-content").css("visibility","hidden");
     $("#feed").css("visibility","visible");
+    
+    
+    
     $("#navClose").on("click touchstart", function(){
         var menu = document.getElementById("nav-menu");
         TweenLite.to(menu, 0.5, {width:"0"});
@@ -41,6 +47,8 @@ $(document).ready(function(){
         }
         $(this).addClass('active');
     });
+    
+    
     //tag selection
     $(".tags li").click(function(){
         var tag = $(this).text();
@@ -70,27 +78,68 @@ $(document).ready(function(){
         $("#submitPost").prop("disabled", true);
     }   
     }*/
+    
+    
     $("#submitPost").click(function(e){
         var postText = $("#postarea").val();
+        /*Uploader code*/
+    var galleryUploader = new qq.FineUploader({
+            element: document.getElementById("uploader"),
+            template: 'qq-template',
+            request: {
+            endpoint: "endpoint.php"
+        },
+        deleteFile: {
+            enabled: true,
+            endpoint: "endpoint.php"
+        },
+        chunking: {
+            enabled: true,
+            concurrent: {
+                enabled: true
+            },
+            success: {
+                endpoint: "endpoint.php?done"
+            }
+        },
+        resume: {
+            enabled: true
+        },
+        retry: {
+            enableAuto: true,
+            showButton: true
+        },
+            thumbnails: {
+                placeholders: {
+                    waitingPath: 'fine-uploader/placeholders/waiting-generic.png',
+                    notAvailablePath: 'fine-uploader/placeholders/not_available-generic.png'
+                }
+            },
+            
+            validation: {
+                allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
+            },
+            autoUpload: false,
+            debug: true
+        });
         console.log(postText);
         if (postText.length == 0)
             {            
                 alert("No text entered. Your post will be discarded");
                 return;
             }
+        galleryUploader.uploadStoredFiles();
         var tagsput = [];
         $('.jumbotron').each(function(index, obj)
             {
                 tagsput.push($(this).text());
             });
-
         console.log(tagsput);
         var postOject = {
             text: postText,
             tags: tagsput
         };
         var datata = JSON.stringify(postOject);
-        console.log(datata);
         $.ajax({
             method: 'POST',
             url: "post.php",
@@ -115,28 +164,12 @@ $(document).ready(function(){
                 console.log(msg);
             }
         }).done(function(){
+            
             console.log("All data sent successfully:");
         });
-        /*Submit the image too if there is one*/
-        if (photo_set == true)
-            {
-                console.log($("#fileUpload")[0]);
-                var formData = new FormData($("#fileUpload"));
-                $.ajax({
-                    url: "post.php",
-                    type: "POST",
-                    data: formData,
-                    success: function (msg) {
-                        alert(msg)
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                });
-                e.preventDefault();
-            }
-        
     });
+    
+    
     $('#photoUpload').click(function(){
         $('#fileUpload').click();
         $("#postsModal").show();
