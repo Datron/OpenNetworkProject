@@ -83,52 +83,12 @@ $(document).ready(function(){
     $("#submitPost").click(function(e){
         var postText = $("#postarea").val();
         /*Uploader code*/
-    var galleryUploader = new qq.FineUploader({
-            element: document.getElementById("uploader"),
-            template: 'qq-template',
-            request: {
-            endpoint: "endpoint.php"
-        },
-        deleteFile: {
-            enabled: true,
-            endpoint: "endpoint.php"
-        },
-        chunking: {
-            enabled: true,
-            concurrent: {
-                enabled: true
-            },
-            success: {
-                endpoint: "endpoint.php?done"
-            }
-        },
-        resume: {
-            enabled: true
-        },
-        retry: {
-            enableAuto: true,
-            showButton: true
-        },
-            thumbnails: {
-                placeholders: {
-                    waitingPath: 'fine-uploader/placeholders/waiting-generic.png',
-                    notAvailablePath: 'fine-uploader/placeholders/not_available-generic.png'
-                }
-            },
-            
-            validation: {
-                allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
-            },
-            autoUpload: false,
-            debug: true
-        });
         console.log(postText);
         if (postText.length == 0)
             {            
                 alert("No text entered. Your post will be discarded");
                 return;
             }
-        galleryUploader.uploadStoredFiles();
         var tagsput = [];
         $('.jumbotron').each(function(index, obj)
             {

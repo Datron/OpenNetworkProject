@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * PHP Server-Side Example for Fine Uploader (traditional endpoint handler).
  * Maintained by Widen Enterprises.
@@ -7,7 +8,8 @@
  *  - handles chunked and non-chunked requests
  *  - supports the concurrent chunking feature
  *  - assumes all upload requests are multipart encoded
- *  - supports the delete file feature
+ *  - handles delete requests
+ *  - handles cross-origin environments
  *
  * Follow these steps to get up and running with Fine Uploader in a PHP environment:
  *
@@ -30,21 +32,26 @@
 require_once "handler.php";
 $uploader = new UploadHandler();
 // Specify the list of valid extensions, ex. array("jpeg", "xml", "bmp")
-$uploader->allowedExtensions = array("jpeg","jpg","png","gif"); // all files types allowed by default
+$uploader->allowedExtensions = array(); // all files types allowed by default
 // Specify max file size in bytes.
-$uploader->sizeLimit = 10000000;
+$uploader->sizeLimit = null;
 // Specify the input name set in the javascript.
 $uploader->inputName = "qqfile"; // matches Fine Uploader's default inputName value by default
 // If you want to use the chunking/resume feature, specify the folder to temporarily save parts.
 $uploader->chunksFolder = "chunks";
+//$method = $_SERVER["REQUEST_METHOD"];
 $method = get_request_method();
 // This will retrieve the "intended" request method.  Normally, this is the
 // actual method of the request.  Sometimes, though, the intended request method
 // must be hidden in the parameters of the request.  For example, when attempting to
-// delete a file using a POST request. In that case, "DELETE" will be sent along with
-// the request in a "_method" parameter.
+// send a DELETE request in a cross-origin environment in IE9 or older, it is not
+// possible to send a DELETE request.  So, we send a POST with the intended method,
+// DELETE, in a "_method" parameter.
 function get_request_method() {
     global $HTTP_RAW_POST_DATA;
+    // This should only evaluate to true if the Content-Type is undefined
+    // or unrecognized, such as when XDomainRequest has been used to
+    // send the request.
     if(isset($HTTP_RAW_POST_DATA)) {
     	parse_str($HTTP_RAW_POST_DATA, $_POST);
     }
@@ -53,7 +60,61 @@ function get_request_method() {
     }
     return $_SERVER["REQUEST_METHOD"];
 }
-if ($method == "POST") {
+function parseRequestHeaders() {
+    $headers = array();
+    foreach($_SERVER as $key => $value) {
+        if (substr($key, 0, 5) <> 'HTTP_') {
+            continue;
+        }
+        $header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+        $headers[$header] = $value;
+    }
+    return $headers;
+}
+function handleCorsRequest() {
+    header("Access-Control-Allow-Origin: *");
+}
+/*
+ * handle pre-flighted requests. Needed for CORS operation
+ */
+function handlePreflight() {
+    handleCorsRequest();
+    header("Access-Control-Allow-Methods: POST, DELETE");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With, Cache-Control");
+}
+// Determine whether we are dealing with a regular ol' XMLHttpRequest, or
+// an XDomainRequest
+$_HEADERS = parseRequestHeaders();
+$iframeRequest = false;
+if (!isset($_HEADERS['X-Requested-With']) || $_HEADERS['X-Requested-With'] != "XMLHttpRequest") {
+    $iframeRequest = true;
+}
+/*
+ * handle the preflighted OPTIONS request. Needed for CORS operation.
+ */
+if ($method == "OPTIONS") {
+    handlePreflight();
+}
+/*
+ * handle a DELETE request or a POST with a _method of DELETE.
+ */
+else if ($method == "DELETE") {
+    handleCorsRequest();
+    $result = $uploader->handleDelete("files");
+    // iframe uploads require the content-type to be 'text/html' and
+    // return some JSON along with self-executing javascript (iframe.ss.response)
+    // that will parse the JSON and pass it along to Fine Uploader via
+    // window.postMessage
+    if ($iframeRequest == true) {
+        header("Content-Type: text/html");
+        echo json_encode($result)."<script src='http://10.0.2.2/jquery.fineuploader-4.1.1/iframe.xss.response-4.1.1.js'></script>";
+    } else {
+        echo json_encode($result);
+    }
+}
+else if ($method == "POST") {
+    handleCorsRequest();
     header("Content-Type: text/plain");
     // Assumes you have a chunking.success.endpoint set to point here with a query parameter of "done".
     // For example: /myserver/handlers/endpoint.php?done
@@ -62,17 +123,23 @@ if ($method == "POST") {
     }
     // Handles upload requests
     else {
+        $storedir = "uploads/".$_SESSION['neighborhood'];
         // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
-        $result = $uploader->handleUpload("files");
+        $result = $uploader->handleUpload($storedir);
         // To return a name used for uploaded file you can use the following line.
         $result["uploadName"] = $uploader->getUploadName();
+        $_SESSION['photo_path'] = $storedir."/".$result["uuid"]."/".$result["uploadName"];
+        // iframe uploads require the content-type to be 'text/html' and
+        // return some JSON along with self-executing javascript (iframe.ss.response)
+        // that will parse the JSON and pass it along to Fine Uploader via
+        // window.postMessage
+        if ($iframeRequest == true) {
+            header("Content-Type: text/html");
+            echo json_encode($result)."<script src='http://{{SERVER_URL}}/{{FINE_UPLOADER_FOLDER}}/iframe.xss.response.js'></script>";
+        } else {
+            echo json_encode($result);
+        }
     }
-    echo json_encode($result);
-}
-// for delete file requests
-else if ($method == "DELETE") {
-    $result = $uploader->handleDelete("files");
-    echo json_encode($result);
 }
 else {
     header("HTTP/1.0 405 Method Not Allowed");

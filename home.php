@@ -30,7 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" async></script>
     <!-- FINE UPLOADER -->
     <link href="fine-uploader/fine-uploader-gallery.min.css" rel="stylesheet">
-    <script src="fine-uploader/fine-uploader.core.min.js"></script>
+    <script src="fine-uploader/fine-uploader.js"></script>
     <script type="text/template" id="qq-template">
         <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Drop files here">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
@@ -213,14 +213,51 @@
       <div class="modal-body">
         <form class="form-horizontal" id="post-form" role="form">
 		<div class="form-group postform">
-            <!--<iframe src="test.html" sandbox="allow-forms allow-scripts"></iframe>-->
             <div id="uploader"></div>
+            <script>
+            var galleryUploader = new qq.FineUploader({
+            element: document.getElementById("uploader"),
+            template: 'qq-template',
+            request: {
+            endpoint: "endpoint.php"
+                },
+                deleteFile: {
+                    enabled: true,
+                    endpoint: "endpoint.php"
+                },
+                chunking: {
+                    enabled: true,
+                    concurrent: {
+                        enabled: true
+                    },
+                    success: {
+                        endpoint: "endpoint.php?done"
+                    }
+                },
+                resume: {
+                    enabled: true
+                },
+                retry: {
+                    enableAuto: true,
+                    showButton: true
+                },
+                    thumbnails: {
+                        placeholders: {
+                            waitingPath: 'fine-uploader/placeholders/waiting-generic.png',
+                            notAvailablePath: 'fine-uploader/placeholders/not_available-generic.png'
+                        }
+                    },
+
+                    validation: {
+                        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
+                    },
+                    debug: true
+                });
+            </script>
             <br>
 			<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>
             <div class="jumbotron"></div>
             <div class="row extraTags">
-                <!--<div class="col-sm-2"><button class="btn" id="photoUpload"><i class="material-icons">add_a_photo</i></button> select photo
-                </div>-->
                 <div class="col-sm-10">
                     <div class="dropdown">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

@@ -23,7 +23,7 @@ class Post {
         lockTableRead($table,$mysqli);
         $likes = 50;
         $comments = 10;
-        $create_post = "INSERT INTO user_posts (id, type, content, img_src, owner, time, likes, neighborhood, comments) VALUES (NULL, '$this->post_type', '$this->post_content', NULL, '$this->post_owner',  CURRENT_TIMESTAMP, '$likes', '$this->post_nbhood', '$comments')";
+        $create_post = "INSERT INTO user_posts (id, type, content, img_src, owner, time, likes, neighborhood, comments) VALUES (NULL, '$this->post_type', '$this->post_content', '$this->post_img', '$this->post_owner',  CURRENT_TIMESTAMP, '$likes', '$this->post_nbhood', '$comments')";
         if($mysqli->query($create_post) == true)
             echo "query done";
         else
@@ -44,33 +44,7 @@ if(isset($_POST['text']))
     {
         $str = $str.$tag;
     }
-    /*if (isset($_FILES['upPhoto']))
-{
-    $nbhood_name = $_SESSION['neighborhood'];
-    echo "photo verified.Script executing";
-    $validextensions = array("jpeg", "jpg", "png");
-    $temporary = explode(".", $_FILES["upPhoto"]["name"]);
-    $file_extension = end($temporary);
-    if ((($_FILES["upPhoto"]["type"] == "image/png") || ($_FILES["upPhoto"]["type"] == "image/jpg") || ($_FILES["upPhoto"]["type"] == "image/jpeg")
-    ) && ($_FILES["upPhoto"]["size"] < 10000000)//Approx. 10mb files can be uploaded.
-    && in_array($file_extension, $validextensions)) {
-    if ($_FILES["upPhoto"]["error"] > 0)
-    {
-    echo "Return Code: " . $_FILES["upPhoto"]["error"];
-    }
-    else
-    {
-    $sourcePath = $_FILES['upPhoto']['tmp_name']; // Storing source path of the file in a variable
-    $targetPath = "images/".basename($_FILES['upPhoto']['name']);// Target path where file is to be stored
-    $_SESSION['photo_path'] = $targetPath;
-    move_uploaded_file($sourcePath,$targetPath); // Moving Uploaded file
-    echo "File uploaded";
-    }
-    }
-}
-else
-    echo "Failure";*/
-    $post = new Post($str,$_POST['text'],$_SESSION['photo_path'],$_SESSION['username'],$_SESSION['neighborhood']);
+    $post = new Post($str,$_POST['text'],$_SESSION["photo_path"],$_SESSION['username'],$_SESSION['neighborhood']);
     $post->makePost();
 }
 else
