@@ -1,4 +1,17 @@
+
 $(document).ready(function(){
+    //special init for feed refresh
+    $.ajax({
+            method: 'POST',
+            url: 'refresh_feed.php',
+            data: {'refresh': 1},
+            success : function(data){
+                $("#feed").children().remove();
+                $("#feed").append(data).hide().fadeIn('fast');
+            }
+        }).done(function(){
+           console.log("Feed updated yet?");
+        });
     //navbar events
     var photo_set = false;
     var screen_width = $(window).width();
@@ -124,27 +137,18 @@ $(document).ready(function(){
                 console.log(msg);
             }
         }).done(function(){
-            
             console.log("All data sent successfully:");
         });
-    });
-    
-    
-    $('#photoUpload').click(function(){
-        $('#fileUpload').click();
-        $("#postsModal").show();
-        $('#fileUpload').change(function(){
-            console.log(this.files);
-            if (this.files && this.files[0])
-                {
-                photo_set = true;
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#preview-image').attr('src', e.target.result);
-                    $('#preview-image').css("visibility","visible");
-                }
-                reader.readAsDataURL(this.files[0]);
+        $("#feed").children().remove();
+        $.ajax({
+            method: 'POST',
+            url: 'refresh_feed.php',
+            data: {'refresh': 1},
+            success : function(data){
+                $("#feed").append(data).hide().fadeIn('fast');
             }
+        }).done(function(){
+           console.log("Feed updated yet?");
         });
     });
 });

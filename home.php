@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+include 'user.php'; 
+session_start();
+$user = new User();
+?>
 <html !DOCTYPE>
 <head>
     <title>MyBairro feed</title>
@@ -168,13 +172,9 @@
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
     <!--------------------------------TAB CONTENT------------------------------------------->
-    <div id="mas" class="closify" height="200" width="300"></div>
-    <div class="container-fluid">
+    <div class="container">
     <div class="tab-content" id="feed">
-        <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $_SESSION['username'] ?> Feed</div>
-          <div class="panel-body"><?php echo $_SESSION['address'] ?></div>
-        </div>
+        <?php $user->getFeed() ?>
         </div>
     <div class="tab-content" id="user">
         <div class="panel panel-default">

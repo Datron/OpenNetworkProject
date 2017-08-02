@@ -25,10 +25,15 @@ class Post {
         $comments = 10;
         $create_post = "INSERT INTO user_posts (id, type, content, img_src, owner, time, likes, neighborhood, comments) VALUES (NULL, '$this->post_type', '$this->post_content', '$this->post_img', '$this->post_owner',  CURRENT_TIMESTAMP, '$likes', '$this->post_nbhood', '$comments')";
         if($mysqli->query($create_post) == true)
+        {
             echo "query done";
+        }
         else
              echo $mysqli->error;
+        $_SESSION['photo_path'] = null;
+        $_SESSION['tags'] = null;
         unlockTable($mysqli);
+        $mysqli->close();
     }
 }
 session_start();

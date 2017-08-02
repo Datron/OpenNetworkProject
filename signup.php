@@ -16,8 +16,7 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
     $phone = htmlentities(strip_tags(stripslashes($_POST['phoneno'])));
     $hashpass = password_hash($password,PASSWORD_BCRYPT);
     lockTableRead($table,$mysqli);
-    $query = "INSERT INTO users (username,password,email,phone,address,neighborhood)
-                VALUES('$name','$hashpass','$email','$phone','$address','$neighborhood')";
+    $query = "INSERT INTO users (username,password,email,phone,address,neighborhood) VALUES('$name','$hashpass','$email','$phone','$address','$neighborhood')";
     unlockTable($mysqli);
     if ($mysqli->query($query) === TRUE) {
         $_SESSION['USR_AUTH'] = TRUE;
