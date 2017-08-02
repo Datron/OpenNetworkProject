@@ -1,6 +1,8 @@
 <?php 
 include 'user.php'; 
 session_start();
+if (!isset($_SESSION['username']))
+    header("Location: /mybiarro/index.html");
 $user = new User();
 ?>
 <html !DOCTYPE>
@@ -172,10 +174,17 @@ $user = new User();
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
     <!--------------------------------TAB CONTENT------------------------------------------->
-    <div class="container">
+   <!-- <div class="container">
     <div class="tab-content" id="feed">
-        <?php $user->getFeed() ?>
+        </div>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+               <?php $user->getFeed() ?>
+        
+            </div>
         </div>
+
     <div class="tab-content" id="user">
         <div class="panel panel-default">
           <div class="panel-heading"><?php echo $_SESSION['username'] ?> User Page</div>

@@ -24,19 +24,23 @@ class User {
         {
             while ($row = $result->fetch_assoc()){
                $html = <<<EOT
-               <div class="panel panel-default postpanel">
-            <div class="panel-heading posthead"><img src="" alt="profile picture" class="img-responsive profilePic">{$row['owner']} posted at {$row['time']} for the {$row['neighborhood']} neighborhood </div>
-            <div class="panel-body">
+               <div class="review-card">
+                    <div class="review-header">
+                        <image src="images/user-default-gray.png" class="image-circle"></image>
+                        <h2 class="person-name"> {$row["owner"]},{$row["neighborhood"]} <h3 class="person-desig"> {$row["time"]}</h3></h2>
+                    </div>
 EOT;
                 if ($row['img_src'] != null)
                     $html .= '<img src="'.$row['img_src'].'" alt="post image" class="img-responsive postpic">';
                 
             $html .= <<<EOT
-                    <p class="post-content"> {$row['content']} </p>
+                    <p class="person-review"> {$row['content']} </p>
+                    <div class="seperator">______________________________________</div>
+                    <div class="toolbar">
+                    <div class="likes"><i class="material-icons">thumb_up</i>{$row['likes']}</div>
+                    <div class="comment"><i class="material-icons">chat</i>{$row['comments']}</div>
                     </div>
-                    <div class="panel-footer"><div class="likes"><i class="material-icons">thumb_up</i>{$row['likes']}</div><div class="comments"><i class="material-icons">chat</i>{$row['comments']}</div>
-                    </div>
-                    </div>
+                </div>
                     <br>
                     <br>
 EOT;

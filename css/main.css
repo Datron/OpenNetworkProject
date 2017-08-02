@@ -193,6 +193,64 @@ body {
     padding-left: 20px;
     margin: 10px;
 }
+/*Post UI css starts here*/
+.review-card {
+    position: relative;
+    margin:auto;
+    margin-top: 10px;
+    box-shadow: 2px 2px 3px 3px grey;
+    height: auto;
+    max-width: 600px;
+    border-radius: 10px;
+    }
+    .review-header {
+        background-color: #27ae60;
+    }
+    .image-circle {
+        margin: 10px;
+        height: 50px;
+        width: 50px;
+        float: left;
+        border-radius: 25px 25px;
+        box-shadow: 4px 8px 4px black;
+    }
+    .person-name {
+        padding-top: 10px;
+        font-weight: 700;
+        font-size: 30px;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+    }
+    .person-desig {
+        position: relative;
+        font-size: 20px;
+        bottom: 20px;
+        left: 20px;
+        font-family: 'Ubuntu',sans-serif;
+        font-weight: 600;
+        color: white;
+    }
+    .person-review {
+        padding: 10px;
+        font-family: 'Lato',sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+    }
+        .seperator {
+            text-align: center;
+            color: grey;
+        }
+        .toolbar {
+            padding: 10px;
+            
+        }
+        .likes {
+            float: left;
+            padding: 5px;
+        }
+        .comment {
+            padding: 5px;
+        }
 @media screen and (max-width:450px)
 {
     .btn-post-material {
@@ -200,5 +258,11 @@ body {
     }
     .postpanel {
         width: 95%;
+    }
+    .person-name {
+        font-size: 15px;
+    }
+    .person-desig {
+        font-size: 10px;
     }
 }
