@@ -42,7 +42,10 @@ body {
     background-color: #27ae60;
     border-radius:  0px;
     width: 100%;
-    box-shadow: 1px 5px #E0E0E0;
+/*    box-shadow: 1px 5px #E0E0E0;*/
+    z-index: 2;
+    height: 120px;
+    transition: 0.3s;
 }
 .active {
     border-bottom: 5px solid white;
@@ -51,6 +54,7 @@ body {
 }
 .tab-content {
     position: absolute;
+    top: 200px;
 }
 .nav-form {
     position: relative;
@@ -136,17 +140,30 @@ body {
     border: 0px;
     border-radius: 50%;
     color: white;
-    box-shadow: 5px 10px #E0E0E0;
+    box-shadow: 2px 5px #616161;
     
+}
+.btn-post-material:hover {
+    color: white;
+    background-color: red;
+    transition: 0.4s;
+}
+.btn-post-material:focus {
+    color: white;
 }
 .postform {
     padding: 10px;
 }
-
 .extraTags {
     padding: 10px;
     margin: 10px;
     background-color: #EEEEEE;
+}
+.well {
+    background: #27ae60!important;
+}
+.well .nav-heading {
+    color: white;
 }
 .tagged {
     background-color: cornflowerblue;
@@ -193,20 +210,19 @@ body {
     padding-left: 20px;
     margin: 10px;
 }
-/*Post UI css starts here*/
+/*Post UI css starts here */
 .review-card {
     position: relative;
-    margin:auto;
-    margin-top: 10px;
     box-shadow: 2px 2px 3px 3px grey;
     height: auto;
     max-width: 600px;
     border-radius: 10px;
     }
-    .review-header {
+.review-header {
         background-color: #27ae60;
+        border-radius: 5px 5px 0px 0px;
     }
-    .image-circle {
+.image-circle {
         margin: 10px;
         height: 50px;
         width: 50px;
@@ -214,14 +230,14 @@ body {
         border-radius: 25px 25px;
         box-shadow: 4px 8px 4px black;
     }
-    .person-name {
+.person-name {
         padding-top: 10px;
         font-weight: 700;
         font-size: 30px;
         font-family: 'Roboto', sans-serif;
         color: white;
     }
-    .person-desig {
+.person-desig {
         position: relative;
         font-size: 20px;
         bottom: 20px;
@@ -230,27 +246,62 @@ body {
         font-weight: 600;
         color: white;
     }
-    .person-review {
+.person-review {
         padding: 10px;
         font-family: 'Lato',sans-serif;
         font-weight: 500;
         font-size: 20px;
     }
-        .seperator {
+.seperator {
             text-align: center;
             color: grey;
         }
-        .toolbar {
+.toolbar {
             padding: 10px;
-            
         }
-        .likes {
+.likes {
             float: left;
-            padding: 5px;
+            padding: 10px;
         }
-        .comment {
-            padding: 5px;
+.comment {
+            padding: 10px;
         }
+.single-comment {
+/*            border-bottom: 1px solid black;*/
+            border-top: 1px solid #0d47a1;
+            padding: 10px;
+        }
+.comments-area {
+            background:#e8eaf6;
+        }
+.actual-comments {
+            margin: 3px;
+            top: 2px;
+            font-family: 'Roboto', sans-serif;   
+            text-overflow: ellipsis;
+        }
+.single-comment .image-circle {
+            float: left;
+            height: 30px;
+            width: 30px;
+            border-radius: 2px 2px;
+            box-shadow: none;
+        }
+.add-comment {
+            padding: 10px;
+             border-top: 1px solid #0d47a1;
+        }
+.nav-sidebar {
+    margin-top: 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px 5px;
+    text-align: center;
+    padding: 10px;
+    display: block;
+}
+.nav-sidebar a {
+    text-decoration: none;
+}
 @media screen and (max-width:450px)
 {
     .btn-post-material {
@@ -268,5 +319,8 @@ body {
     .postsmodal {
         height: 100%;
         width: 100%;
+    }
+    .person-review {
+        font-size: 15px;
     }
 }

@@ -85,6 +85,31 @@
         .comment {
             padding: 5px;
         }
+        .single-comment {
+/*            border-bottom: 1px solid black;*/
+            border-top: 1px solid #0d47a1;
+            padding: 10px;
+        }
+        .comments-area {
+            background:#e8eaf6;
+        }
+        .actual-comments {
+            margin: 3px;
+            top: 2px;
+            font-family: 'Roboto', sans-serif;   
+            text-overflow: ellipsis;
+        }
+        .single-comment .image-circle {
+            float: left;
+            height: 30px;
+            width: 30px;
+            border-radius: 2px 2px;
+            box-shadow: none;
+        }
+        .add-comment {
+            padding: 10px;
+             border-top: 1px solid #0d47a1;
+        }
     </style>
 </head>
 <body>
@@ -99,10 +124,26 @@
                             <p class="person-review"> Lorem ipsum dolor sit amet, duo ea evertitur necessitatibus, te viderer eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis, reformidans vituperatoribus an eos. Vel elit quas te, dicant homero nostrud no eum.
                             Vis ut vocent saperet, vix in quot possim praesent. Sit ad falli tractatos posidonium, impedit probatus sit no. Et iisque accommodare quo, id veri invidunt has. Ne cum summo tibique, aliquid admodum deleniti cu mea, cum dicam veritus suscipit ut. No quo stet timeam, usu id error animal repudiare. Ferri novum dictas ut qui, suas lorem in qui. 
                             </p>
-                    <div class="seperator">__________________________________________________________</div>
                     <div class="toolbar">
                     <div class="likes"><i class="material-icons">thumb_up</i>50</div>
                     <div class="comment"><i class="material-icons">chat</i>10</div>
+                    </div>
+                    <div class="comments-area">
+                        
+                        <div class="single-comment">
+                        <image src="images/user-default-gray.png" class="image-circle"></image>
+                            <h4>Username, Area</h4>
+                        <p class="actual-comments"> lorem ipsum eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis </p>    
+                        </div>
+                        <div class="single-comment">
+                        <image src="images/user-default-gray.png" class="image-circle"></image>
+                            <h4>Username, Area</h4>
+                        <p class="actual-comments"> lorem ipsum eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis </p>    
+                        </div>
+                        <div class="add-comment">
+                        <textarea name="" id="userComment" class="form-control" rows="2" placeholder="add a comment...."></textarea>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

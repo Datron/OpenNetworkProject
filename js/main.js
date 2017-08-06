@@ -22,9 +22,40 @@ $(document).ready(function(){
             width = screen_width;
     else 
         width = "100%";
+    if ($(window).width()  > 1000)
+        {
+         $(".navMenu").css("visibility","hidden");
+         $("#nav-menu-button").css("visibility","hidden");
+        }
+    else
+        $(".nav-sidebar").css("display","none");
     
     
-//    $(".tab-content").css("visibility","hidden");
+    $(window).resize(function(){
+       if ($(window).width() < 992)
+           {
+           $(".nav-sidebar").css("display","none");
+            $(".navMenu").css("visibility","visible");
+            $("#nav-menu-button").css("visibility","visible");
+           }
+        else
+            {
+            $(".nav-sidebar").css("display","block");
+            $(".navMenu").css("visibility","hidden");
+            $("#nav-menu-button").css("visibility","hidden");
+            }
+    });
+    $(".tab-content").css("visibility","hidden");
+    //making the navbar scroll with the page
+    $(window).scroll(function(){
+        var scroll = $(this).scrollTop();
+        var topDist = $(".welcome-msg").position();
+        if ($(this).scrollTop() > topDist.top)
+            $(".mainNav").css({"position":"fixed","top":"0"});
+        else
+              $(".mainNav").css({"position":"static","top":"0"});
+        });
+    
     $("#navClose").on("click touchstart", function(){
         var menu = document.getElementById("nav-menu");
         TweenLite.to(menu, 0.5, {width:"0"});
@@ -33,6 +64,8 @@ $(document).ready(function(){
         var menu = document.getElementById("nav-menu");
         TweenLite.to(menu, 0.5, {width:width});
     });
+    
+    /*Tab selection */
     $(".col-lg-3").on("click", function(){
         $(".col-lg-3").removeClass('active');
         var title = $(this).attr("title");
@@ -40,17 +73,24 @@ $(document).ready(function(){
             case 'feed':
                 $(".tab-content").css("visibility","hidden");
                 $("#feed").css("visibility","visible");
+                $(".nav-sidebar").css("visibility","visible");
                 break;
             case 'users':
                 $(".tab-content").css("visibility","hidden");
+                $("#feed").css("visibility","hidden");
+                $(".nav-sidebar").css("visibility","hidden");
                 $("#user").css("visibility","visible");
                 break;
             case 'events':
                 $(".tab-content").css("visibility","hidden");
+                $("#feed").css("visibility","hidden");
+                $(".nav-sidebar").css("visibility","hidden");
                 $("#event").css("visibility","visible");
                 break;
             case 'settings':
                 $(".tab-content").css("visibility","hidden");
+                $("#feed").css("visibility","hidden");
+                $(".nav-sidebar").css("visibility","hidden");
                 $("#settings").css("visibility","visible");
                 break;
         }
@@ -134,18 +174,19 @@ $(document).ready(function(){
             }
         }).done(function(){
             console.log("All data sent successfully:");
+            $(".refresh-feed").children().remove();
+            $.ajax({
+                method: 'POST',
+                url: 'refresh_feed.php',
+                data: {'refresh': 1},
+                success : function(data){
+                    $(".refresh-feed").append(data).hide().fadeIn('fast');
+                }
+            }).done(function(){
+               console.log("Feed updated yet?");
+            });
         });
-        $("#feed").children().remove();
-        $.ajax({
-            method: 'POST',
-            url: 'refresh_feed.php',
-            data: {'refresh': 1},
-            success : function(data){
-                $("#feed").append(data).hide().fadeIn('fast');
-            }
-        }).done(function(){
-           console.log("Feed updated yet?");
-        });
-    });
-});
+    }); //End of submit post events
+    
+}); // end of document.ready
 

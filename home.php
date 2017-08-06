@@ -174,19 +174,33 @@ $user = new User();
     </nav> 
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
+    <div class="container welcome-msg">
     <div class="panel panel-default">
 	<div class="panel-body">
-	   hello,<?php $_SESSION['username'] ?>
+	   hello <?php echo $_SESSION['username'] ?>, here is your feed for <?php echo $_SESSION['neighborhood'] ?>
 	</div>
 </div>
+    </div>
 
     <!--------------------------------TAB CONTENT------------------------------------------->
-   <!-- <div class="container">
-    <div class="tab-content" id="feed">
-        </div>-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-1"></div>
+            <div class="col-md-3 nav-sidebar well list-group">
+                <h1 class="nav-heading">Categories</h1>
+                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a>
+                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
+                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">list</i>Lost and Found</h3></a>
+
+                <h1 class="nav-heading">People</h1>
+                    <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h3></a>
+                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h3></a>
+
+                <h1 class="nav-heading">Options</h1>
+                    <a href="logout.php"  class="list-group-item"><h3 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h3></a>
+
+            </div>
+            <div class="col-md-6 refresh-feed" id="feed">
                <?php $user->getFeed() ?>
         
             </div>
@@ -302,5 +316,6 @@ $user = new User();
 
   </div>
 </div>
+    
 </body>
 </html>
