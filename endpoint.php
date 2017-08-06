@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(TRUE);
 /**
  * PHP Server-Side Example for Fine Uploader (traditional endpoint handler).
  * Maintained by Widen Enterprises.
@@ -128,10 +129,7 @@ else if ($method == "POST") {
         $result = $uploader->handleUpload($storedir);
         // To return a name used for uploaded file you can use the following line.
         $result["uploadName"] = $uploader->getUploadName();
-        if ($result["uploadName"] != null)
             $_SESSION['photo_path'] = $storedir."/".$result["uuid"]."/".$result["uploadName"];
-        else
-            $_SESSION['photo_path'] = null;
         // iframe uploads require the content-type to be 'text/html' and
         // return some JSON along with self-executing javascript (iframe.ss.response)
         // that will parse the JSON and pass it along to Fine Uploader via

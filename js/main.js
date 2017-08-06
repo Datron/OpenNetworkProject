@@ -24,11 +24,7 @@ $(document).ready(function(){
         width = "100%";
     
     
-    $(".tab-content").css("visibility","hidden");
-    $("#feed").css("visibility","visible");
-    
-    
-    
+//    $(".tab-content").css("visibility","hidden");
     $("#navClose").on("click touchstart", function(){
         var menu = document.getElementById("nav-menu");
         TweenLite.to(menu, 0.5, {width:"0"});
