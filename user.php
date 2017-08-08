@@ -52,9 +52,10 @@ EOT;
                         <p class="actual-comments"> lorem ipsum eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis </p>    
                         </div>
                         <div class="add-comment">
-                        <textarea name="" id="userComment" class="form-control" rows="2" placeholder="add a comment...."></textarea>
+                        <textarea name="" class="form-control userComment" rows="2" placeholder="add a comment...."></textarea>
+                        <br>
+                        <button class="btn btn-primary comment-button" value="{$row['id']}">comment</button>
                         </div>
-                        
                     </div>
                 </div>
                     <br>

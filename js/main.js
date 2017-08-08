@@ -117,17 +117,6 @@ $(document).ready(function(){
                 break;
         }
     });
-    //submission
-    /*$("#postarea").on("keyup", action);
-    $("#postarea").on("change", action);
-    function action() {
-    if( $("#postarea").val().length > 0) {
-        $("#submitPost").prop("disabled", false);
-    } else {
-        $("#submitPost").prop("disabled", true);
-    }   
-    }*/
-    
     
     $("#submitPost").click(function(e){
         var postText = $("#postarea").val();
@@ -187,6 +176,20 @@ $(document).ready(function(){
             });
         });
     }); //End of submit post events
-    
+    //handling comments
+        $(document).on('click', '.comment-button', function(){
+        var postId = $(this).val();
+        console.log(postId);
+        var prev = $(this).parent().find('textarea');
+        var val = $(prev).val();
+        alert(val);
+        $.ajax({
+            method: 'POST',
+            url: 'comments.php',
+            data: {'post_id':postId,'content':val}
+        }).done(function(){
+            console.log("comment submitted");
+        });
+    });
 }); // end of document.ready
 
