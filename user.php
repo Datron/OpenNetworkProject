@@ -40,17 +40,10 @@ EOT;
                     <div class="comment"><i class="material-icons">chat</i>{$row['comments']}</div>
                     </div>
                     <div class="comments-area">
-                        
-                        <div class="single-comment">
-                        <image src="images/user-default-gray.png" class="image-circle"></image>
-                            <h4>Username, Area</h4>
-                        <p class="actual-comments"> lorem ipsum eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis </p>    
-                        </div>
-                        <div class="single-comment">
-                        <image src="images/user-default-gray.png" class="image-circle"></image>
-                            <h4>Username, Area</h4>
-                        <p class="actual-comments"> lorem ipsum eruditi expetenda pri. Sea wisi saepe eirmod ea. Eos quando dicunt efficiendi ea, ex libris iudicabit mel. No dolorum vituperata his, per ne legimus facilisis </p>    
-                        </div>
+EOT;
+                    $html .= self::manageComments($row['id'],$mysqli);
+                
+                    $html .= <<<EOT
                         <div class="add-comment">
                         <textarea name="" class="form-control userComment" rows="2" placeholder="add a comment...."></textarea>
                         <br>
@@ -78,8 +71,24 @@ EOT;
     function postLiked(){
         
     }
-    function manageComments(){
-        
+    function manageComments($post_id,$mysqli){
+        $q = "SELECT * FROM comments WHERE post_id=$post_id";
+        $comments = null;
+        if ($result = $mysqli->query($q))
+        {
+            while ($row = $result->fetch_assoc())
+            {
+                $comments .= <<<EOT
+                <div class="single-comment">
+                        <image src="images/user-default-gray.png" class="image-circle"></image>
+                <h4>{$row['owner']},{$row['neighborhood']}</h4>
+                <p class="actual-comments"> {$row['content']} </p>
+                </div>
+EOT;
+                
+            }
+            return $comments;
+        }
     }
     function catergoryClicks(){
         

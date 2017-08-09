@@ -189,6 +189,17 @@ $(document).ready(function(){
             data: {'post_id':postId,'content':val}
         }).done(function(){
             console.log("comment submitted");
+            $(".refresh-feed").children().remove();
+            $.ajax({
+                method: 'POST',
+                url: 'refresh_feed.php',
+                data: {'refresh': 1},
+                success : function(data){
+                    $(".refresh-feed").append(data).hide().fadeIn('fast');
+                }
+            }).done(function(){
+               console.log("Feed updated yet?");
+            });
         });
     });
 }); // end of document.ready
