@@ -1,4 +1,12 @@
-
+$(document).ready(function(){
+  $('.settingsPopover').popover({ 
+    html : true,
+    content: function() {
+      return $('#popover_content').html();
+    },
+    container: '.well'
+  });
+});
 $(document).ready(function(){
     //special init for feed refresh
     $.ajax({
@@ -32,24 +40,30 @@ $(document).ready(function(){
     
     
     $(window).resize(function(){
-       if ($(window).width() < 992)
+       if ($(window).width() < 1031)
            {
            $(".nav-sidebar").css("display","none");
             $(".navMenu").css("visibility","visible");
             $("#nav-menu-button").css("visibility","visible");
+            $(".tabs").css("display","block");
+            $(".mynav").css("display","none");
+            $(".mainNav").css("height","120px");
            }
         else
             {
             $(".nav-sidebar").css("display","block");
             $(".navMenu").css("visibility","hidden");
             $("#nav-menu-button").css("visibility","hidden");
+            $(".tabs").css("display","none");
+            $(".mynav").css("display","block");
+            $(".mainNav").css("height","60px");
             }
     });
     $(".tab-content").css("visibility","hidden");
     //making the navbar scroll with the page
     $(window).scroll(function(){
         var scroll = $(this).scrollTop();
-        var topDist = $(".welcome-msg").position();
+        var topDist = $(".").position();
         if ($(this).scrollTop() > topDist.top)
             $(".mainNav").css({"position":"fixed","top":"0"});
         else
@@ -182,7 +196,8 @@ $(document).ready(function(){
         console.log(postId);
         var prev = $(this).parent().find('textarea');
         var val = $(prev).val();
-        alert(val);
+        if (val.length != 0)
+            {
         $.ajax({
             method: 'POST',
             url: 'comments.php',
@@ -201,6 +216,9 @@ $(document).ready(function(){
                console.log("Feed updated yet?");
             });
         });
+            }
+        else
+            alert('comment discarded');
     });
 }); // end of document.ready
 

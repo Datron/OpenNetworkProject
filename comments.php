@@ -9,7 +9,7 @@ if ($mysqli->connect_error) {
 if (isset($_POST['post_id']) && isset($_POST['content']))
 {
     $post_id = htmlspecialchars($_POST['post_id']);
-    $comment = htmlspecialchars($_POST['content']);
+    $comment = $mysqli->real_escape_string(stripslashes(strip_tags(htmlspecialchars($_POST['content']))));
     lockTableRead($table,$mysqli);
     $query = "INSERT INTO comments(id, post_id, content, owner, neighborhood, TIMESTAMP) VALUES(NULL,'$post_id','$comment','{$_SESSION['username']}','{$_SESSION['neighborhood']}',CURRENT_TIMESTAMP)";
     echo $query;

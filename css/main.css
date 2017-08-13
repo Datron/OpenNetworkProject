@@ -44,8 +44,50 @@ body {
     width: 100%;
 /*    box-shadow: 1px 5px #E0E0E0;*/
     z-index: 2;
-    height: 120px;
+    height: 60px;
     transition: 0.3s;
+}
+ul {
+    list-style: none;
+}
+.col-md-6 .navbar {
+    bottom: 7px;
+}
+.topOptions {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    bottom: 20px;
+}
+.topOptions li a {
+    color: white;
+}
+.topOptions li a:hover {
+    color: white;
+    background: #388E3C;
+}
+.topOptions li a:focus {
+    color: white;
+    background: #388E3C;
+}
+.navH {
+    font: 'Ubuntu',sans-serif;
+    text-align: center; 
+    font-weight: 500;
+    color: black;
+}
+.settingsPopover .image-circle {
+    margin-top: -10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px 20px;
+    box-shadow: none;
+}
+.settingsPopover {
+    color: black;
+}
+.popover {
+    width: 200px!important;
 }
 .active {
     border-bottom: 5px solid white;
@@ -160,10 +202,21 @@ body {
     background-color: #EEEEEE;
 }
 .well {
-    background: #27ae60!important;
+    background: transparent!important;
+    max-width:300px; 
 }
 .well .nav-heading {
-    color: white;
+    color: black;
+}
+.well a .navOption {
+    padding: 10px;
+    color: black;
+    font-size: 20px;
+/*    border-top: 2px solid #BDBDBD;*/
+    border-bottom: 1px solid #BDBDBD;
+}
+.well a .navOption:hover {
+    background-color: #9E9E9E;
 }
 .tagged {
     background-color: cornflowerblue;
@@ -220,6 +273,7 @@ body {
     }
 .review-header {
         background-color: #27ae60;
+        height: 80px;
         border-radius: 5px 5px 0px 0px;
     }
 .image-circle {
@@ -293,7 +347,7 @@ body {
         }
 .nav-sidebar {
     margin-top: 15px;
-    background-color: #f5f5f5;
+    background-color: #9E9E9E;
     border-radius: 5px 5px;
     text-align: center;
     padding: 10px;

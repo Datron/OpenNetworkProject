@@ -8,8 +8,8 @@ if ($mysqli->connect_error) {
 } 
 if ( isset($_POST["userlogin"]) && isset($_POST["password"]) )
 {
-    $userlogin = htmlentities(stripslashes(strip_tags($_POST["userlogin"])));
-    $password = $_POST["password"];
+    $userlogin = $mysqli->real_escape_string(htmlentities(stripslashes(strip_tags($_POST["userlogin"]))));
+    $password = $mysqli->real_escape_string($_POST["password"]);
     lockTableWrite($table,$mysqli);
     $query = "SELECT username,email,address,phone,neighborhood,password FROM users WHERE email='$userlogin'";
     $result = $mysqli->query($query);

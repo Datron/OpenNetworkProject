@@ -21,6 +21,7 @@ class Post {
             die("Connection failed: " . $mysqli->connect_error);
         }
         lockTableRead($table,$mysqli);
+        $this->post_content = $mysqli->real_escape_string($this->post_content);
         $likes = 50;
         $comments = 10;
         $create_post = "INSERT INTO user_posts (id, type, content, img_src, owner, time, likes, neighborhood, comments) VALUES (NULL, '$this->post_type', '$this->post_content', '$this->post_img', '$this->post_owner',  CURRENT_TIMESTAMP, '$likes', '$this->post_nbhood', '$comments')";

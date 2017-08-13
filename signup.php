@@ -8,17 +8,17 @@ if ($mysqli->connect_error) {
 } 
 if (isset($_POST['firstname']) && isset($_POST['zip']))
 {
-    $name = htmlentities(strip_tags(stripslashes($_POST['firstname'].' '.$_POST['lastname'])));
-    $password = htmlentities(strip_tags(stripslashes($_POST['npass'])));
-    $email = htmlentities(strip_tags(stripslashes($_POST['email'])));
-    $neighborhood = htmlentities(strip_tags(stripslashes($_POST['neighborhood'])));
-    $address = htmlentities(strip_tags(stripslashes($_POST['sAddress'].','.$_POST['cAddress'].','.$_POST['zip'])));
-    $phone = htmlentities(strip_tags(stripslashes($_POST['phoneno'])));
+    $name = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['firstname'].' '.$_POST['lastname']))));
+    $password = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['npass']))));
+    $email = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['email']))));
+    $neighborhood = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['neighborhood']))));
+    $address = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['sAddress'].','.$_POST['cAddress'].','.$_POST['zip']))));
+    $phone = $mysqli->real_escape_string(htmlentities(strip_tags(stripslashes($_POST['phoneno']))));
     $hashpass = password_hash($password,PASSWORD_BCRYPT);
     lockTableRead($table,$mysqli);
     $query = "INSERT INTO users (username,password,email,phone,address,neighborhood) VALUES('$name','$hashpass','$email','$phone','$address','$neighborhood')";
     unlockTable($mysqli);
-    if ($mysqli->query($query) === TRUE) {
+    if ($mysqli->query($query) == TRUE) {
         $_SESSION['USR_AUTH'] = TRUE;
         $_SESSION['username'] = $name;
         $_SESSION['email'] = $email;

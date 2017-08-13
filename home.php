@@ -146,7 +146,7 @@ $user = new User();
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
                 </div>
                 <form class="nav-form">
-                <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="col-xs-10 col-sm-10 col-md-4">
                   <div class="input-group">
                     <input type="text" id="searchField" name="searchText" class="form-control form-field" placeholder="Search">
                     <div class="input-group-btn">
@@ -157,9 +157,26 @@ $user = new User();
                   </div>
                     </div>
                 </form> 
+                <div class="col-md-6">
+                <nav class="navbar mynav">
+                    <div class="container-fluid">
+                    <ul class="nav navbar-nav topOptions">
+                        <li class="active"><a href="">Home</a></li>
+                        <li><a href=""><i class="material-icons">notifications</i></a></li>
+                        <li><a href="">Profile</a></li>
+                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="focus" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
+                        </ul>
+                    <div id="popover_content" class="container-fluid" style="display:none">
+                        <a href="#"><h4 class="navH">Settings</h4></a>
+                        <a href="logout.php"  class=""><h4 class="navH">Sign out</h4></a>                    
+                        </div>
+                    </div>
+                    </nav>
+                </div>
             
         </div>
             <!-------------------TABS ROW---------------------->
+
             <div class="tabs">
             <nav class="navTabs">
                 <div class="row">
@@ -170,34 +187,32 @@ $user = new User();
                 </div>
                 </nav>
             </div>
+
         </div>
     </nav> 
     <!--------------------------------END OF NAVBAR ---------------------------------------->
 </div>
-    <div class="container welcome-msg">
-    <div class="panel panel-default">
-	<div class="panel-body">
-	   hello <?php echo $_SESSION['username'] ?>, here is your feed for <?php echo $_SESSION['neighborhood'] ?>
-	</div>
-</div>
-    </div>
+    <div class="container welcome-msg" style="display:none">
+                <div class="panel panel-default">
+                <div class="panel-body">
+                   hello <?php echo $_SESSION['username'] ?>, here is your feed for <?php echo $_SESSION['neighborhood'] ?>
+                </div>
+            </div>
+                </div>
 
     <!--------------------------------TAB CONTENT------------------------------------------->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-3 nav-sidebar well list-group">
+            <div class="col-md-3 nav-sidebar well">
                 <h1 class="nav-heading">Categories</h1>
-                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a>
-                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
-                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">list</i>Lost and Found</h3></a>
+                <a href="" class=""><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a>
+                <a href="" class=""><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
+                <a href="" class=""><h3 class="navOption"><i class="material-icons">list</i>Lost and Found</h3></a>
 
                 <h1 class="nav-heading">People</h1>
-                    <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h3></a>
-                <a href="" class="list-group-item"><h3 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h3></a>
-
-                <h1 class="nav-heading">Options</h1>
-                    <a href="logout.php"  class="list-group-item"><h3 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h3></a>
+                    <a href="" class=""><h3 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h3></a>
+                <a href="" class=""><h3 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h3></a>
 
             </div>
             <div class="col-md-6 refresh-feed" id="feed">
