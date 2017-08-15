@@ -163,12 +163,15 @@ $user = new User();
                     <ul class="nav navbar-nav topOptions">
                         <li class="active"><a href="">Home</a></li>
                         <li><a href=""><i class="material-icons">notifications</i></a></li>
-                        <li><a href="">Profile</a></li>
-                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="focus" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
                     <div id="popover_content" class="container-fluid" style="display:none">
-                        <a href="#"><h4 class="navH">Settings</h4></a>
-                        <a href="logout.php"  class=""><h4 class="navH">Sign out</h4></a>                    
+                        <a href="#" class=""><h4 class="navH">Settings</h4></a>
+                        
+                        <a href="#" class=""><h4 class="navH">Invite Neighbors</h4></a>
+                        <a href="#" class=""><h4 class="navH">Feedback</h4></a>
+                        <a href="logout.php" class=""><h4 class="navH">Sign out</h4></a>
                         </div>
                     </div>
                     </nav>
@@ -204,7 +207,7 @@ $user = new User();
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="col-md-3 nav-sidebar well">
+            <div class="col-md-2 nav-sidebar well-ff">
                 <h1 class="nav-heading">Categories</h1>
                 <a href="" class=""><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a>
                 <a href="" class=""><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
@@ -222,10 +225,45 @@ $user = new User();
         </div>
 
     <div class="tab-content" id="user">
-        <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $_SESSION['username'] ?> User Page</div>
-          <div class="panel-body"><?php echo $_SESSION['neighborhood'] ?></div>
+        <!-------------------------USER PROFILE UI------------------------->
+    <div class="container-fluid">
+        <div class="user-basics">
+        <img src="images/user-default-gray.png" class="image-square img-responsive">
+            <h1 class="username">><?php echo $_SESSION['username']?> </h1>
+            <h2>><?php echo $_SESSION['neighborhood']?> </h2>
         </div>
+        <div class="user-info">
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+        <div class="container">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">About me</h3>
+              </div>
+              <div class="panel-body">
+                    Add an about me.........
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">Interests</h3>
+              </div>
+              <div class="panel-body">
+                    interests
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">recommendations</h3>
+              </div>
+              <div class="panel-body">
+                    Panel content
+              </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
         </div>
     <div class="tab-content" id="event">
         <div class="panel panel-default">
@@ -234,10 +272,7 @@ $user = new User();
         </div>
         </div>
     <div class="tab-content" id="settings">
-        <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $_SESSION['username'] ?> Settings</div>
-          <div class="panel-body">Settings come here</div>
-        </div>
+        <?php $user->getUserSettings() ?>
         </div>
     </div>
     <!--------------------------END OF TAB CONTENT-------------------------------------------->

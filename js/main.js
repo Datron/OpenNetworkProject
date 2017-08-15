@@ -4,7 +4,7 @@ $(document).ready(function(){
     content: function() {
       return $('#popover_content').html();
     },
-    container: '.well'
+    container: '.well-ff'
   });
 });
 $(document).ready(function(){
@@ -86,24 +86,24 @@ $(document).ready(function(){
         switch (title){
             case 'feed':
                 $(".tab-content").css("visibility","hidden");
-                $("#feed").css("visibility","visible");
+                $("#feed").css("display","block");
                 $(".nav-sidebar").css("visibility","visible");
                 break;
             case 'users':
                 $(".tab-content").css("visibility","hidden");
-                $("#feed").css("visibility","hidden");
+                $("#feed").css("display","none");
                 $(".nav-sidebar").css("visibility","hidden");
                 $("#user").css("visibility","visible");
                 break;
             case 'events':
                 $(".tab-content").css("visibility","hidden");
-                $("#feed").css("visibility","hidden");
+                $("#feed").css("display","none");
                 $(".nav-sidebar").css("visibility","hidden");
                 $("#event").css("visibility","visible");
                 break;
             case 'settings':
                 $(".tab-content").css("visibility","hidden");
-                $("#feed").css("visibility","hidden");
+                $("#feed").css("display","none");
                 $(".nav-sidebar").css("visibility","hidden");
                 $("#settings").css("visibility","visible");
                 break;

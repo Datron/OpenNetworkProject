@@ -1,5 +1,6 @@
 body {
     overflow-x: hidden;
+    background: #F4F4F7;
 }
 .navMenu {
     background-size: contain;
@@ -201,22 +202,32 @@ ul {
     margin: 10px;
     background-color: #EEEEEE;
 }
-.well {
+.well-ff {
+    border-radius: 0px!important;
     background: transparent!important;
-    max-width:300px; 
+    max-width:350px;
+    height: 100%;
+    text-align: left!important;
+    letter-spacing: -1px;
+    
 }
-.well .nav-heading {
-    color: black;
-}
-.well a .navOption {
-    padding: 10px;
+.well-ff .nav-heading {
     color: black;
     font-size: 20px;
-/*    border-top: 2px solid #BDBDBD;*/
-    border-bottom: 1px solid #BDBDBD;
 }
-.well a .navOption:hover {
-    background-color: #9E9E9E;
+.navOption .material-icons {
+    font-size: 20px;
+    padding: 3px;
+}
+.well-ff a .navOption {
+    color: black;
+    opacity: 0.6;
+    font-size: 20px;
+/*    border-top: 2px solid #BDBDBD;*/
+/*    border-bottom: 1px solid #BDBDBD;*/
+}
+.well-ff a .navOption:hover {
+    background-color: #FFF;
 }
 .tagged {
     background-color: cornflowerblue;
@@ -266,7 +277,7 @@ ul {
 /*Post UI css starts here */
 .review-card {
     position: relative;
-    box-shadow: 2px 2px 3px 3px grey;
+    box-shadow: 1px 1px 2px 2px grey;
     height: auto;
     max-width: 600px;
     border-radius: 10px;
@@ -285,15 +296,15 @@ ul {
         box-shadow: 4px 8px 4px black;
     }
 .person-name {
-        padding-top: 10px;
+        padding-top: 20px;
         font-weight: 700;
-        font-size: 30px;
+        font-size: 25px;
         font-family: 'Roboto', sans-serif;
         color: white;
     }
 .person-desig {
         position: relative;
-        font-size: 20px;
+        font-size: 15px;
         bottom: 20px;
         left: 20px;
         font-family: 'Ubuntu',sans-serif;

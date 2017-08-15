@@ -28,6 +28,7 @@
     <!-- GreenSock JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <style>
+
     .review-card {
     position: relative;
     margin:auto;
@@ -64,6 +65,9 @@
         font-weight: 600;
         color: white;
     }
+        .user-basics {
+            text-align: center;
+        }
     .person-review {
         padding: 10px;
         font-family: 'Lato',sans-serif;
@@ -110,9 +114,41 @@
             padding: 10px;
              border-top: 1px solid #0d47a1;
         }
+        
+    .image-square {
+        margin: 10px;
+        height: 200px;
+        width: 200px;
+        border-radius: 4px 4px;
+        box-shadow: 4px 8px 4px black;
+    }
+    .username {
+        font-weight: 700;
+        font-size: 30px;
+        font-family: 'Roboto', sans-serif;
+        color: black;
+    }
+    .person-desig {
+        position: relative;
+        font-size: 20px;
+        bottom: 20px;
+        left: 20px;
+        font-family: 'Ubuntu',sans-serif;
+        font-weight: 600;
+        color: white;
+    }
+    .user-basics {
+            text-align: center;
+    }
+        .user-info {
+        }
+        .user-info .panel {
+            max-width: 400px;
+        }
     </style>
 </head>
 <body>
+<!-- POST UI
    <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
@@ -151,5 +187,51 @@
     </div>
     </div>
     
+-->
+    <!-------------------------USER PROFILE UI------------------------->
+    <div class="container-fluid">
+        <div class="user-basics">
+        <img src="images/user-default-gray.png" class="image-square">
+            <h1 class="username">Name</h1>
+            <h2>Place</h2>
+        </div>
+        <div class="user-info">
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+        <div class="container">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">About me</h3>
+              </div>
+              <div class="panel-body">
+                    Add an about me.........
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">Interests</h3>
+              </div>
+              <div class="panel-body">
+                    interests
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                    <h3 class="panel-title">recommendations</h3>
+              </div>
+              <div class="panel-body">
+                    Panel content
+              </div>
+            </div>
+
+
+            
+            </div>
+
+        
+        </div>
+
+    </div>
+    </div>
 </body>
 </html>
