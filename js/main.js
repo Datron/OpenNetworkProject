@@ -9,6 +9,24 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     //special init for feed refresh
+    if ($(window).width() < 1031)
+           {
+           $(".nav-sidebar").css("display","none");
+            $(".navMenu").css("visibility","visible");
+            $("#nav-menu-button").css("visibility","visible");
+            $(".tabs").css("display","block");
+            $(".mynav").css("display","none");
+            $(".mainNav").css("height","120px");
+           }
+        else
+            {
+            $(".nav-sidebar").css("display","block");
+            $(".navMenu").css("visibility","hidden");
+            $("#nav-menu-button").css("visibility","hidden");
+            $(".tabs").css("display","none");
+            $(".mynav").css("display","block");
+            $(".mainNav").css("height","60px");
+            }
     $.ajax({
             method: 'POST',
             url: 'refresh_feed.php',

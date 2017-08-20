@@ -56,14 +56,14 @@
                 border-radius: 20px;
             }
             .biarro_description {
-                margin-top: 60px;
+                margin: 60px;
             }
             .main {
                 margin-top: 100px;
             }
             .features {
                 background-color: white;
-                height: 100%;
+                height: auto;
             }
             .featureHeading {
                 font-family: 'Roboto',sans-serif;
@@ -84,6 +84,39 @@
             .feature_icon {
                 font-size: 100px;
             }
+            .buttons {
+                text-align: center;
+                display: none;
+            }
+            .buttons .btn-biarro {
+                border: 1px solid white;
+                background: transparent;
+                width: 200px;
+                margin: 10px;
+            }
+            @media screen and (max-width:1050px)
+            {
+                body {
+                    text-align: center;
+                }
+                .form-horizontal {
+                    display: none;
+                }
+                .form-inline {
+                    display: none;
+                }
+                .main {
+                    margin: 10px;
+                }
+                .biarro_description {
+                margin: 10px;
+                }
+                .buttons {
+                    text-align: center;
+                    width: 100%;
+                    display: block;
+                }
+            }
         </style>
     </head>
     <body>
@@ -92,7 +125,7 @@
         <div class="container-fluid">
             <div class="row">
             <div class="col-md-3"><h1 class="navHeading">myBairro</h1></div>
-            <div class="col-md-9">
+            <div class="col-md-9 col-xs-1">
                 <form action="login.php" method="POST" class="form-inline navbar-form navbar-right" role="form">
 
 	               <div class="form-group inline_form_nav">
@@ -130,13 +163,19 @@
 		          </div>
                 <div class="form-group">
 			     <div class="col-sm-10 col-sm-offset-2">
-				    <button type="submit" class="btn btn-biarro">Submit</button>
+				    <button type="submit" class="btn btn-biarro">Sign Up</button>
 			     </div>
 		          </div>
                 </form>
                 </div>
         </div>
+            <div class="buttons">
+                <a href="login.php"><button type="button" class="btn btn-biarro" id="login-mobile">Login</button></a>
+                    <br>
+                <a href="signup.php"><button type="button" class="btn btn-biarro" id="signup-mobile">Sign Up</button></a>
+                </div>
         </div>
+        
         <!---------------------------- FEATURE LIST ------------------------------------->
         <div class="container-fluid features">
         <div class="row">

@@ -133,6 +133,7 @@ $user = new User();
     <a href=""><h2 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h2></a>
         
     <h1 class="nav-heading">Options</h1>
+        <a href="https://goo.gl/forms/3rCEChSCx3Lt5ijd2"><h2 class="navOption"><i class="material-icons">feedback</i>FeedBack</h2></a>
         <a href="logout.php"><h2 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h2></a>
         
     </div>
@@ -170,7 +171,7 @@ $user = new User();
                         <a href="#" class=""><h4 class="navH">Settings</h4></a>
                         
                         <a href="#" class=""><h4 class="navH">Invite Neighbors</h4></a>
-                        <a href="#" class=""><h4 class="navH">Feedback</h4></a>
+                        <a href="https://goo.gl/forms/3rCEChSCx3Lt5ijd2" class=""><h4 class="navH">Feedback</h4></a>
                         <a href="logout.php" class=""><h4 class="navH">Sign out</h4></a>
                         </div>
                     </div>
@@ -198,7 +199,7 @@ $user = new User();
     <div class="container welcome-msg" style="display:none">
                 <div class="panel panel-default">
                 <div class="panel-body">
-                   hello <?php echo $_SESSION['username'] ?>, here is your feed for <?php echo $_SESSION['neighborhood'] ?>
+                   hello <?php echo $_SESSION['username'] ?>, Please provide feed back once you've tried out mybairro. The feedback form is available in the settings menu.
                 </div>
             </div>
                 </div>

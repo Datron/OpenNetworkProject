@@ -25,7 +25,7 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
         $_SESSION['address'] = $address;
         $_SESSION['phone'] = $phone;
         $_SESSION['neighborhood'] = $neighborhood;
-        header("Location: http://localhost/mybiarro/home.php"); /* Redirect browser */
+        header("Location: http://www.mybairro.com/home.php"); /* Redirect browser */
         exit;
     }
     else{
