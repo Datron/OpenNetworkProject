@@ -81,7 +81,7 @@ $(document).ready(function(){
     //making the navbar scroll with the page
     $(window).scroll(function(){
         var scroll = $(this).scrollTop();
-        var topDist = $(".").position();
+        var topDist = $(".welcome-msg").position();
         if ($(this).scrollTop() > topDist.top)
             $(".mainNav").css({"position":"fixed","top":"0"});
         else
@@ -214,12 +214,14 @@ $(document).ready(function(){
         console.log(postId);
         var prev = $(this).parent().find('textarea');
         var val = $(prev).val();
+        var user = $(".review-header[value='"+postId+"']").find('h2').text();
+        console.log(user);
         if (val.length != 0)
             {
         $.ajax({
             method: 'POST',
             url: 'comments.php',
-            data: {'post_id':postId,'content':val}
+            data: {'post_id':postId,'content':val,'post_owner':user}
         }).done(function(){
             console.log("comment submitted");
             $(".refresh-feed").children().remove();

@@ -120,7 +120,7 @@ function userVerified($row){
     $verifyquery = "UPDATE users SET isLoggedIn='1' WHERE username='$row->username'";
     $result1 = $mysqli->query($verifyquery);
     unlockTable($mysqli);
-    header("Location: /home.php"); /* Redirect browser */
+    header("Location: /mybiarro/home.php"); /* Redirect browser */
     exit;
 }
 function wrongCred(){

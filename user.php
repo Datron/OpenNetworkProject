@@ -8,9 +8,12 @@ class User {
     public $address;
     public $isLoggedIn;
     public $userAction;
+    
+    
     function setUserAction($usr_action){
         $this->userAction = $usr_action;
     }
+    
     function getFeed(){
         include 'dbconfig.php';
         $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
@@ -23,7 +26,7 @@ class User {
                <div class="review-card">
                     <div class="review-header" value="{$row['id']}">
                         <image src="images/user-default-gray.png" class="image-circle"></image>
-                        <h2 class="person-name"> {$row["owner"]},{$row["neighborhood"]} <h3 class="person-desig"> {$row["time"]}</h3></h2>
+                        <h2 class="person-name">{$row["owner"]}</h2><h3 class="person-desig"> {$row["neighborhood"]}</h3>
                     </div>
 EOT;
                 if ($row['img_src'] != null)
@@ -55,18 +58,27 @@ EOT;
         }
         $mysqli->close();
     }
+    
+    
     function post(){
-        
+        //add post functionality in the future if needed else delete this function
     }
+    
     function notifs(){
-        
+        //add notifs to the bell icon during first load    
     }
+    
     function getNeighbors(){
-        
+        //get neighbors in the area
     }
-    function postLiked(){
-        
+    
+    function postLiked($userpost){
+        $query = "INSERT INTO notifications VALUES('$userpost',null,'$post_id',null,'{$_SESSION['username']}',false,CURRENT_TIMESTAMP)";
+        if ($mysqli->query($query) == true)
+            echo "notifs sent and updated for likes";
     }
+    
+    
     function manageComments($post_id,$mysqli){
         $q = "SELECT * FROM comments WHERE post_id=$post_id";
         $comments = null;
@@ -86,14 +98,18 @@ EOT;
             return $comments;
         }
     }
+    
+    
     function catergoryClicks(){
-        
+        //Deal with clicks on the sidebar
     }
+    
     function showEvents(){
-        
+        //find events to display to the user    
     }
+    
     function displayUserProfile(){
-        
+        //show other user profiles    
     }
     function getUserSettings(){
         $html = <<<EOT
@@ -149,8 +165,9 @@ EOT;
 EOT;
         echo $html;
     }
-    function setUserSettings(){
-        
-    }
     
+    function setUserSettings(){
+        //new user settings updated here
+    }
 }
+?>
