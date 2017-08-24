@@ -9,7 +9,6 @@ class User {
     public $isLoggedIn;
     public $userAction;
     
-    
     function setUserAction($usr_action){
         $this->userAction = $usr_action;
     }
@@ -63,11 +62,6 @@ EOT;
     function post(){
         //add post functionality in the future if needed else delete this function
     }
-    
-    function notifs(){
-        //add notifs to the bell icon during first load    
-    }
-    
     function getNeighbors(){
         //get neighbors in the area
     }

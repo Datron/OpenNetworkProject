@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   $('.settingsPopover').popover({ 
     html : true,
@@ -7,6 +8,24 @@ $(document).ready(function(){
     container: '.well-ff'
   });
 });
+$(document).ready(function(){
+    $.ajax({
+            method: 'POST',
+            url: 'notifs.php',
+            data: {'notifs':1}
+        }).done(function(data){
+            $('#notifications').html(data);
+        });
+});
+$(document).ready(function(){
+    $('.notifsPopover').popover({ 
+      html : true,
+      content: function() {
+        return $('#notifications').html();
+      },
+      container: '.well-ff'
+    });
+  });
 $(document).ready(function(){
     //special init for feed refresh
     if ($(window).width() < 1031)

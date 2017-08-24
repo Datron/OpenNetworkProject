@@ -11,7 +11,7 @@ $user = new User();
     <title>MyBairro feed</title>
     <meta charset="utf-8">
     <meta lang="en">
-    <!---------------- SEO --------------------------->
+    <!---------------- SEO ---------------------------->
     
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
@@ -19,7 +19,7 @@ $user = new User();
 	<meta property="og:title" content=""/>
 	<meta property="og:description" content=""/>
 	<meta property="og:url" content=""/>
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Chela+One|Fira+Sans|Lato|Roboto|Ubuntu" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -137,11 +137,11 @@ $user = new User();
         <a href="logout.php"><h2 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h2></a>
         
     </div>
-    <!------------------------------ START OF PAGE ----------------------------------------->
+    <!------------------------------ START OF PAGE ------------------------------------------>
 <div class="mainNav">
     <nav class="navbar">
         <div class="container-fluid">
-            <!----------SEARCH ROW------------->
+            <!----------SEARCH ROW-------------->
             <div class="row">
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
@@ -163,10 +163,12 @@ $user = new User();
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
                         <li class="active"><a href="">Home</a></li>
-                        <li><a href=""><i class="material-icons">notifications</i></a></li>
+                        <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i></a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
+                    <div id="notifications" class="container-fluid" style="display:none">
+                    </div> 
                     <div id="popover_content" class="container-fluid" style="display:none">
                         <a href="#" class=""><h4 class="navH">Settings</h4></a>
                         
@@ -203,8 +205,9 @@ $user = new User();
                 </div>
             </div>
                 </div>
+        
 
-    <!--------------------------------TAB CONTENT------------------------------------------->
+    <!--------------------------------TAB CONTENT-------------------------------------------->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1"></div>
@@ -226,12 +229,12 @@ $user = new User();
         </div>
 
     <div class="tab-content" id="user">
-        <!-------------------------USER PROFILE UI------------------------->
+        <!-------------------------USER PROFILE UI-------------------------->
     <div class="container-fluid">
         <div class="user-basics">
         <img src="images/user-default-gray.png" class="image-square img-responsive">
-            <h1 class="username">><?php echo $_SESSION['username']?> </h1>
-            <h2>><?php echo $_SESSION['neighborhood']?> </h2>
+            <h1 class="username"><?php echo $_SESSION['username']?> </h1>
+            <h2><?php echo $_SESSION['neighborhood']?> </h2>
         </div>
         <div class="user-info">
             <div class="col-md-4"></div>
@@ -278,7 +281,7 @@ $user = new User();
     </div>
     <!--------------------------END OF TAB CONTENT-------------------------------------------->
     
-    <!--------------------------POST BUTTON AND CONTENT --------------------------------------->
+    <!--------------------------POST BUTTON AND CONTENT ---------------------------------------->
     <div class="container-fluid postButton">
     <button type="button" class="btn btn-post-material" data-toggle="modal" data-target="#postsModal" data-backdrop="static"><i class="material-icons">add</i></button>
     </div>

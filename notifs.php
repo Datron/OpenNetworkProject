@@ -1,48 +1,52 @@
 <?php
 include 'dbconfig.php';
 $table = 'notfications';
+session_start();
 $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
-if ($mysqli->connect_error) {
+if ($mysqli->connect_error) 
+{
     die("Connection failed: " . $mysqli->connect_error);
 }
 $username = $_SESSION['username'];
-if($_POST['notfis'] == 1)
+if(true)
 {
-    $query = "SELECT comment-id,post-id,comment-from,liked,liked-by,is-read FROM notifications WHERE username = '$username' ORDER BY time DESC limit 6";
+    $query = "SELECT comment_id,post_id,comment_from,liked_by,is_read FROM notifications WHERE username = '$username' ORDER BY time DESC limit 6";
     $results = $mysqli->query($query);
-    $html;
-    while ($row = $result->fetch_assoc())
+    $html=null;
+    while ($row = $results->fetch_object())
     {
-        if  ($row[comment-from != null])
+        if  ($row->comment_from != null)
         {
-        if ($row['is-read'])
-        $html.= <<<EOT
-        <div class="row notifs read" value='{$row[post-id]}'>
-            <p class="notifs-text"><b>{$row['comment-from']}</b> commented on your post </p>
-        </div>
-EOT;
-        else
-          $html.= <<<EOT
-        <div class="row notifs" value='{$row[post-id]}'>
-            <p class="notifs-text"><b>{$row['comment-from']}</b> commented on your post </p>
-        </div>
-EOT;      
-        }
-        else if ($row['liked'])
-        {
-            if ($row['is-read'])
+            if ($row->is_read == 1)
+            {
             $html.= <<<EOT
-        <div class="row notifs read" value='{$row[post-id]}'>
-            <p class="notifs-text"><b>{$row['liked-by']}</b> liked your post </p>
-        </div>
+            <div class="row notifs read" value='$row->post_id'>
+                <p class="notifs-text"><b>$row->comment_from</b> commented on your post </p>
+            </div>
 EOT;
+            }
             else
-                $html.= <<<EOT
-        <div class="row notifs" value='{$row[post-id]}'>
-            <p class="notifs-text"><b>{$row['liked-by']}</b> liked your post </p>
-        </div>
+            {
+            $html.= <<<EOT
+            <div class="row notifs" value='$row->post_id'>
+                <p class="notifs-text"><b>$row->comment_from</b> commented on your post </p>
+            </div>
 EOT;
+            } 
         }
+        else if ($row->liked_by != NULL)
+        {
+            if ($row->is_read)
+            {
+                $html.= <<<EOT
+                <div class="row notifs read" value='$row->post_id'>
+                    <p class="notifs-text"><b>$row->liked_by</b> liked your post </p>
+                </div>
+EOT;
+            } 
+        }
+       
     }
+    echo $html;
 }
 ?>

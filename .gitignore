@@ -1,2 +1,9 @@
 #sql dbs
 *.sql
+#ignore my test scripts
+test.html
+upload.php
+uploads
+chunks
+images
+fine-uploader

@@ -367,6 +367,19 @@ ul {
 .nav-sidebar a {
     text-decoration: none;
 }
+/* Notifications UI defined here */
+.notifs {
+    padding: 6px;
+    background-color:#27ae60;
+    color: #FFF;
+    /* border-bottom: 1px solid #388E3C; */
+    font-family: 'Roboto',sans-serif;
+    font-size: 18px;
+}
+.read {
+    background-color: #FFF;
+    color: black;
+}
 @media screen and (max-width:450px)
 {
     .btn-post-material {

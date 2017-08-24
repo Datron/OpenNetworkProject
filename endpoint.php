@@ -124,7 +124,7 @@ else if ($method == "POST") {
     }
     // Handles upload requests
     else {
-        $storedir = "uploads/".$_SESSION['neighborhood'];
+        $storedir = "uploads/";
         // Call handleUpload() with the name of the folder, relative to PHP's getcwd()
         $result = $uploader->handleUpload($storedir);
         // To return a name used for uploaded file you can use the following line.
