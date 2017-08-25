@@ -3,7 +3,7 @@ include 'user.php';
 session_start();
 session_regenerate_id(TRUE); 
 if (!isset($_SESSION['username']))
-    header("Location: /mybiarro/index.html");
+    header("Location: mybiarro/index.html");
 $user = new User();
 ?>
 <html !DOCTYPE>
@@ -34,7 +34,7 @@ $user = new User();
     <!-- JQuery script -->
     
     <!-- GreenSock JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
     <!-- FINE UPLOADER -->
     <link href="fine-uploader/fine-uploader-gallery.min.css" rel="stylesheet">
     <script src="fine-uploader/fine-uploader.js"></script>
@@ -118,8 +118,12 @@ $user = new User();
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/main.js"></script>
+    <script src="js/notifs.js"></script>
 </head>
 <body>
+    <div id="loader-parent">
+    <div id="loader"></div>
+    </div>
     <!------------------------------ NAVIGATION MENU -------------------------------------->
     <div id="nav-menu" class="navMenu">
     <h1 class="nav-heading">Categories</h1>
@@ -163,7 +167,7 @@ $user = new User();
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
                         <li class="active"><a href="">Home</a></li>
-                        <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i></a></li>
+                        <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
@@ -208,7 +212,7 @@ $user = new User();
         
 
     <!--------------------------------TAB CONTENT-------------------------------------------->
-    <div class="container-fluid">
+    <div class="container-fluid mainbody">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-2 nav-sidebar well-ff">

@@ -8,9 +8,9 @@ if ($mysqli->connect_error)
     die("Connection failed: " . $mysqli->connect_error);
 }
 $username = $_SESSION['username'];
-if(true)
+if($_POST['notifs'] == 1)
 {
-    $query = "SELECT comment_id,post_id,comment_from,liked_by,is_read FROM notifications WHERE username = '$username' ORDER BY time DESC limit 6";
+    $query = "SELECT comment_id,post_id,comment_from,liked_by,is_read FROM notifications WHERE username = '$username' ORDER BY time DESC";
     $results = $mysqli->query($query);
     $html=null;
     while ($row = $results->fetch_object())
@@ -48,5 +48,9 @@ EOT;
        
     }
     echo $html;
+}
+if (isset($_POST['refresh']))
+{
+
 }
 ?>

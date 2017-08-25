@@ -1,4 +1,9 @@
-
+$(document).ready(function(){
+    setTimeout(function(){
+        var loader = document.getElementById('loader-parent');
+        TweenLite.to(loader,1.5,{autoAlpha:0});
+    },3000);
+});
 $(document).ready(function(){
   $('.settingsPopover').popover({ 
     html : true,
@@ -9,6 +14,10 @@ $(document).ready(function(){
   });
 });
 $(document).ready(function(){
+    $('.notifs').ready(function(){
+        var unread = $('.notifs').length - $('.read').length;
+        $('.badge').html(unread);
+    });
     $.ajax({
             method: 'POST',
             url: 'notifs.php',
