@@ -140,6 +140,7 @@ ul {
     color: black;
 }
 .popover {
+    position: fixed;
     width: 360px!important;
     padding: 0px!important;
     margin: 0px!important;
@@ -421,14 +422,23 @@ ul {
 /* Notifications UI defined here */
 .notifs {
     padding: 6px;
-    background-color:#27ae60;
-    color: #FFF;
+    background-color:#c2c2d6;
+    color: black;
     border-bottom: 1px solid black; 
     font-family: 'Roboto',sans-serif;
     font-size: 18px;
 }
+#event .notifs {
+    margin-top: 10px;
+    border-radius: 2px 2px;
+}
+#event {
+    position: relative;
+    top: 0px;
+    text-align: center;
+}
 .notifs:hover {
-    background-color: #388E3C;
+    background-color:#a3a3c2;
 }
 .read {
     background-color: #FFF;
@@ -446,10 +456,10 @@ ul {
         width: 95%;
     }
     .person-name {
-        font-size: 15px;
+        font-size: 18px;
     }
     .person-desig {
-        font-size: 10px;
+        font-size: 12px;
     }
     .postsmodal {
         height: 100%;

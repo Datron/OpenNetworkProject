@@ -7,12 +7,14 @@ function getNotifs(){
         url: 'notifs.php',
         data: {'notifs':1}
     }).done(function(data){
-        $('#notifications').children().remove();
+        $('.notifs').remove();
         $('#notifications').html(data);
+        $('#event').html(data);
         //count unread notifications
         $('.notifs').ready(function(){
             var unread = $('.notifs').length - $('.read').length;
-            $('.badge').val(unread);
+            var unread = unread/2;
+            $('.badge').html(unread);
         });
     });
 }

@@ -10,29 +10,25 @@ $(document).ready(function(){
     content: function() {
       return $('#popover_content').html();
     },
-    container: '.well-ff'
+    container: '.navbar'
   });
 });
-$(document).ready(function(){
-    $('.notifs').ready(function(){
-        var unread = $('.notifs').length - $('.read').length;
-        $('.badge').html(unread);
-    });
-    $.ajax({
-            method: 'POST',
-            url: 'notifs.php',
-            data: {'notifs':1}
-        }).done(function(data){
-            $('#notifications').html(data);
-        });
-});
+//$(document).ready(function(){
+//    $.ajax({
+//            method: 'POST',
+//            url: 'notifs.php',
+//            data: {'notifs':1}
+//        }).done(function(data){
+//            $('#notifications').html(data);
+//        });
+//});
 $(document).ready(function(){
     $('.notifsPopover').popover({ 
       html : true,
       content: function() {
         return $('#notifications').html();
       },
-      container: '.well-ff'
+      container: '.navbar'
     });
   });
 $(document).ready(function(){

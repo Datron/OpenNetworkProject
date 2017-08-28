@@ -150,7 +150,7 @@ $user = new User();
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
                 </div>
-                <form class="nav-form">
+                <form class="nav-form" method="post" action="search.php">
                 <div class="col-xs-10 col-sm-10 col-md-4">
                   <div class="input-group">
                     <input type="text" id="searchField" name="searchText" class="form-control form-field" placeholder="Search">
@@ -192,7 +192,7 @@ $user = new User();
                 <div class="row">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 active" title="feed"><button class="btn-tab" ><i class="material-icons tabicon">line_weight</i></button></div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  title="users"><button class="btn-tab"><i class="material-icons tabicon">face</i></button></div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  title="events"><button class="btn-tab"><i class="material-icons tabicon">event</i></button></div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  title="events"><button class="btn-tab"><i class="material-icons tabicon">notifications</i></button></div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" title="settings"><button class="btn-tab"><i class="material-icons tabicon">settings</i></button></div>
                 </div>
                 </nav>
@@ -274,10 +274,7 @@ $user = new User();
     </div>
         </div>
     <div class="tab-content" id="event">
-        <div class="panel panel-default">
-          <div class="panel-heading"><?php echo $_SESSION['username']?> Events</div>
-          <div class="panel-body"><?php echo $_SESSION['phone'] ?></div>
-        </div>
+
         </div>
     <div class="tab-content" id="settings">
         <?php $user->getUserSettings() ?>
