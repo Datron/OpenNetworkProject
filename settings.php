@@ -1,12 +1,34 @@
 <?php
     session_start();
+    include 'dbconfig.php';
+    $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
+    if ($mysqli->connect_error)
+        {
+            die("connection failed".$mysqli->connect_error);
+        }
+    $query = "SELECT * FROM user_settings WHERE name = '{$_SESSION['username']}'";
+    $res = $mysqli->query($query);
+    if($res->num_rows == 0)
+    {
+        if(isset($_POST['about']))
+        {
+        $about = $mysqli->real_escape_string($_POST['about']);
+        $interests = $mysqli->real_escape_string($_POST['interests']);
+        $query = "INSERT INTO user_settings(name,about,interests,recommendations,email_verified,address_verified,invited,picture) VALUES(
+            '{$_SESSION['username']}','$about','$interests','recommendations',0,0,0,'profilepic')";
+        if (!$mysqli->query($query))
+        {
+            echo "query failed ".$mysqli->error;
+        }
+        }
+    }
 ?>
 <html !DOCTYPE>
 <head>
-    <title>myBairro - The social network for your neigbourhood</title>
+    <title>myBairro - update your settings</title>
     <meta charset="utf-8">
     <meta lang="en">
-    <!---------------- SEO --------------------------->
+    <!---------------- SEO ---------------------------->
     
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
@@ -14,7 +36,7 @@
 	<meta property="og:title" content=""/>
 	<meta property="og:description" content=""/>
 	<meta property="og:url" content=""/>
-    <!----------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Chela+One|Fira+Sans|Lato|Roboto|Ubuntu|Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -33,6 +55,28 @@
     <script src="fine-uploader/fine-uploader.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js"></script>
+    <script>
+    $(document).ready(function(){
+    setInterval(getNotifs,5000);
+});
+function getNotifs(){
+    $.ajax({
+        method: 'POST',
+        url: 'notifs.php',
+        data: {'notifs':1}
+    }).done(function(data){
+        $('.notifs').remove();
+        $('#notifications').html(data);
+        $('#event').html(data);
+        //count unread notifications
+        $('.notifs').ready(function(){
+            var unread = $('.notifs').length - $('.read').length;
+            // var unread = unread;
+            $('.badge').html(unread);
+        });
+    });
+}
+    </script>
     </head>
     <body>
     <!------------------------------ NAVIGATION MENU -------------------------------------->
@@ -51,11 +95,11 @@
         <a href="logout.php"><h2 class="navOption"><i class="glyphicon glyphicon-log-out"></i>Sign out</h2></a>
         
     </div>
-    <!------------------------------ START OF PAGE ----------------------------------------->
+    <!------------------------------ START OF PAGE ------------------------------------------>
 <div class="mainNav">
     <nav class="navbar">
         <div class="container-fluid">
-            <!----------SEARCH ROW------------->
+            <!--SEARCH ROW-->
             <div class="row">
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
@@ -77,15 +121,17 @@
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
                         <li class="active"><a href="">Home</a></li>
-                        <li><a href=""><i class="material-icons">notifications</i></a></li>
-                        <li><a href="">Profile</a></li>
+                        <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
+                        <li><a href="profile.php">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
+                    <div id="notifications" class="container-fluid" style="display:none">
+                    </div> 
                     <div id="popover_content" class="container-fluid" style="display:none">
                         <a href="#" class=""><h4 class="navH">Settings</h4></a>
                         
                         <a href="#" class=""><h4 class="navH">Invite Neighbors</h4></a>
-                        <a href="#" class=""><h4 class="navH">Feedback</h4></a>
+                        <a href="https://goo.gl/forms/3rCEChSCx3Lt5ijd2" class=""><h4 class="navH">Feedback</h4></a>
                         <a href="logout.php" class=""><h4 class="navH">Sign out</h4></a>
                         </div>
                     </div>
@@ -102,21 +148,21 @@
             <div class="col-md-5">
                 <form action="" method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <legend>Name</legend>
-                        <div class="row">
+                        <!-- <legend>Name</legend> -->
+                        <!-- <div class="row">
                          <div class="col-md-6">
-                             <input type="text" id="new-firstname" class="form-control" value="" required="required">
+                             <input type="text" id="new-firstname" name="fname" class="form-control" value="" required="required">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" id="new-lastname" class="form-control" value="" required="required">
+                            <input type="text" id="new-lastname" name="lname" class="form-control" value="" required="required">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <legend>email</legend>
 
-                        <input type="email" id="new-email" class="form-control" value="" required="required">
-                    </div>
+                        <input type="email" id="new-email" name="email" class="form-control" value="" required="required">
+                    </div> -->
                     
                     <div class="form-group">
                         <legend>Profile picture</legend>
@@ -128,10 +174,10 @@
                     <div class="form-group">
                     <legend>Details</legend>
                     <span class="label label-default">About</span>
-                    <textarea name="" id="aboutme" class="form-control" rows="3" required="required"></textarea>
+                    <textarea name="about" id="aboutme" class="form-control" rows="3" required="required"></textarea>
                     <br>
                     <label class="label label-default">Interests</label>
-                    <textarea name="" id="interests" class="form-control" rows="2" required="required"></textarea>
+                    <textarea name="interests" id="interests" class="form-control" rows="2" required="required"></textarea>
                     </div>
 
                     <div class="form-group">
