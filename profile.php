@@ -1,6 +1,8 @@
 <?php
 include 'dbconfig.php';
 session_start();
+if (!isset($_SESSION['username']))
+    header("Location: /index.html");
 $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
 if ($mysqli->connect_error)
     {
@@ -139,9 +141,9 @@ $row = $res->fetch_assoc();
                 <nav class="navbar mynav">
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
-                        <li class="active"><a href="">Home</a></li>
+                        <li><a href="home.php">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
-                        <li><a href="profile.php">Profile</a></li>
+                        <li  class="active"><a href="profile.php">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
                     <div id="notifications" class="container-fluid" style="display:none">
@@ -163,7 +165,9 @@ $row = $res->fetch_assoc();
     </nav> 
 <div class="container-fluid">
         <div class="user-basics">
-        <img src="images/user-default-gray.png" class="image-square">
+        <img src="<?php if(isset($_SESSION['prof_pic'])) 
+                                    echo $_SESSION['prof_pic'];
+                             else echo 'images/user-default-gray.png' ?>" class="image-square">
             <h1 class="username"><?php echo $_SESSION['username']?> </h1>
             <h2><?php echo $_SESSION['neighborhood']?> </h2>
         </div>
@@ -199,5 +203,6 @@ $row = $res->fetch_assoc();
         </div>
     </div>
     </div>
+        </div>
     </body>
 </html>

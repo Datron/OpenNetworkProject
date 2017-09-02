@@ -1,6 +1,8 @@
 <?php
     session_start();
     include 'dbconfig.php';
+if (!isset($_SESSION['username']))
+    header("Location: /index.html");
     $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
     if ($mysqli->connect_error)
         {
@@ -14,12 +16,41 @@
         {
         $about = $mysqli->real_escape_string($_POST['about']);
         $interests = $mysqli->real_escape_string($_POST['interests']);
+        $target_dir = 'profile_pics/';
+        $target_file1 = $target_dir . basename($_FILES["pic"]["name"]);
+        if (move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file1))
+        {
+            echo "file Upload successful";
+        }
         $query = "INSERT INTO user_settings(name,about,interests,recommendations,email_verified,address_verified,invited,picture) VALUES(
-            '{$_SESSION['username']}','$about','$interests','recommendations',0,0,0,'profilepic')";
+            '{$_SESSION['username']}','$about','$interests','recommendations',0,0,0,'$target_file1')";
+        $_SESSION['prof_pic'] = $target_file1;
         if (!$mysqli->query($query))
         {
             echo "query failed ".$mysqli->error;
         }
+        }
+    }
+    else 
+    {
+        if(isset($_POST['about']))
+        {
+            $about = $mysqli->real_escape_string($_POST['about']);
+            $interests = $mysqli->real_escape_string($_POST['interests']);
+            if (isset($_FILES['pic']))
+            {
+                $target_dir = 'profile_pics/';
+                $target_file1 = $target_dir . basename($_FILES["pic"]["name"]);
+                move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file1);
+                $_SESSION['prof_pic'] = $target_file1;
+            }
+            else
+                echo "no file uploaded";
+            $query = "UPDATE user_settings SET about='$about',interests='$interests',picture='{$_SESSION['prof_pic']}' WHERE name='{$_SESSION['username']}'";
+            if (!$mysqli->query($query))
+            {
+                echo "query failed ".$mysqli->error;
+            }
         }
     }
 ?>
@@ -76,6 +107,25 @@ function getNotifs(){
         });
     });
 }
+
+        $(document).ready(function(){
+           $('#upload').click(function(){
+            $('.filesup').click();
+            });
+            $('.filesup').change(function(){
+            console.log(this.files);
+            if (this.files && this.files[0])
+                {
+                photo_set = true;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#pic').attr('src', e.target.result);
+                    $('#pic').css("visibility","visible");
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        });
     </script>
     </head>
     <body>
@@ -120,7 +170,7 @@ function getNotifs(){
                 <nav class="navbar mynav">
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
-                        <li class="active"><a href="">Home</a></li>
+                        <li><a href="home.php">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
@@ -146,7 +196,7 @@ function getNotifs(){
             <div class="row">
                 <div class="col-md-1"></div>
             <div class="col-md-5">
-                <form action="" method="POST" class="form-horizontal" role="form">
+                <form action="" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
                     <div class="form-group">
                         <!-- <legend>Name</legend> -->
                         <!-- <div class="row">
@@ -166,10 +216,12 @@ function getNotifs(){
                     
                     <div class="form-group">
                         <legend>Profile picture</legend>
-                        <img src="images/user-default-gray.png" class="user-profile-pic img-responsive">
+                        <img src="<?php if(isset($_SESSION['prof_pic'])) 
+                                    echo $_SESSION['prof_pic'];
+                             else echo 'images/user-default-gray.png' ?>" class="user-profile-pic img-responsive" id="pic">
                         <br><br>
-                    <input type="file" class="filesup" style="display:none">
-                    <button type="button" class="btn btn-success">Upload New</button>
+                    <input type="file" class="filesup" style="display:none" name="pic">
+                    <button type="button" class="btn btn-success" id="upload">Upload New</button>
                     </div>
                     <div class="form-group">
                     <legend>Details</legend>
