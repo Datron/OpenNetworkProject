@@ -8,9 +8,11 @@ if ($mysqli->connect_error)
     {
         die("connection failed".$mysqli->connect_error);
     }
-$query = "SELECT * FROM user_settings WHERE name = '{$_SESSION['username']}'";
-$res = $mysqli->query($query);
-$row = $res->fetch_assoc();
+if(isset($_GET['user']))
+{
+    $query = "SELECT * FROM user_settings us,users WHERE us.name = '{$_GET['user']}' AND users.username=us.name";
+    $res = $mysqli->query($query);
+    $row = $res->fetch_assoc();
 ?>
 <html !DOCTYPE>
 <head>
@@ -125,7 +127,7 @@ $row = $res->fetch_assoc();
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
                 </div>
-                <form class="nav-form">
+                <form class="nav-form" method="post" action="search.php">
                 <div class="col-xs-10 col-sm-10 col-md-4">
                   <div class="input-group">
                     <input type="text" id="searchField" name="searchText" class="form-control form-field" placeholder="Search">
@@ -143,8 +145,10 @@ $row = $res->fetch_assoc();
                     <ul class="nav navbar-nav topOptions">
                         <li><a href="home.php">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
-                        <li  class="active"><a href="profile.php">Profile</a></li>
-                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
+                        <li  class="active"><a href="profile.php?user=<?php echo $_SESSION['username'] ?>">Profile</a></li>
+                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="<?php if(isset($_SESSION['prof_pic'])) 
+                                    echo $_SESSION['prof_pic'];
+                             else echo 'images/user-default-gray.png' ?>" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
                     <div id="notifications" class="container-fluid" style="display:none">
                     </div> 
@@ -166,10 +170,10 @@ $row = $res->fetch_assoc();
 <div class="container-fluid">
         <div class="user-basics">
         <img src="<?php if(isset($_SESSION['prof_pic'])) 
-                                    echo $_SESSION['prof_pic'];
+                                    echo $row['picture'];
                              else echo 'images/user-default-gray.png' ?>" class="image-square">
-            <h1 class="username"><?php echo $_SESSION['username']?> </h1>
-            <h2><?php echo $_SESSION['neighborhood']?> </h2>
+            <h1 class="username"><?php echo $row['name']?> </h1>
+            <h2><?php echo $row['neighborhood']?> </h2>
         </div>
         <div class="user-info">
             <div class="col-md-4"></div>
@@ -206,3 +210,6 @@ $row = $res->fetch_assoc();
         </div>
     </body>
 </html>
+<?php
+}
+?>

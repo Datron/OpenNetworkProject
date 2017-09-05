@@ -8,8 +8,8 @@ if ($mysqli->connect_error) {
 if (isset($_POST['searchText']))
 {
     $key = $mysqli->real_escape_string($_POST['searchText']);
-    $query_user = "SELECT * FROM users WHERE username LIKE '%$key%'";
-    $query_post = "SELECT * FROM user_posts WHERE owner LIKE '%$key%' OR content LIKE '%$key%'";
+    $query_user = "SELECT * FROM users,user_settings us WHERE users.username LIKE '%$key%' AND us.name=users.username";
+    $query_post = "SELECT * FROM user_posts up,user_settings us WHERE up.owner LIKE '%$key%' AND us.name = up.owner";
     $res1 = $mysqli->query($query_user);
     $res2 = $mysqli->query($query_post);
 ?>
@@ -46,7 +46,28 @@ if (isset($_POST['searchText']))
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/main.js"></script>
-    <script src="js/notifs.js"></script>
+    <script>
+    $(document).ready(function(){
+    setInterval(getNotifs,5000);
+    });
+    function getNotifs(){
+    $.ajax({
+        method: 'POST',
+        url: 'notifs.php',
+        data: {'notifs':1}
+    }).done(function(data){
+        $('.notifs').remove();
+        $('#notifications').html(data);
+        $('#event').html(data);
+        //count unread notifications
+        $('.notifs').ready(function(){
+            var unread = $('.notifs').length - $('.read').length;
+            // var unread = unread/2;
+            $('.badge').html(unread);
+        });
+    });
+}
+</script>
 </head>
 <body>
     <!------------------------------ NAVIGATION MENU -------------------------------------->
@@ -75,7 +96,7 @@ if (isset($_POST['searchText']))
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
                 </div>
-                <form class="nav-form" method="post" action="">
+                <form class="nav-form" method="post" action="search.php">
                 <div class="col-xs-10 col-sm-10 col-md-4">
                   <div class="input-group">
                     <input type="text" id="searchField" name="searchText" class="form-control form-field" placeholder="Search">
@@ -93,13 +114,15 @@ if (isset($_POST['searchText']))
                     <ul class="nav navbar-nav topOptions">
                         <li class="active"><a href="">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
-                        <li><a href="profile.php">Profile</a></li>
-                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
+                        <li><a href="profile.php?user=<?php echo $_SESSION['username'] ?>">Profile</a></li>
+                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="<?php if(isset($_SESSION['prof_pic'])) 
+                                    echo $_SESSION['prof_pic'];
+                             else echo 'images/user-default-gray.png' ?>" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
                     <div id="notifications" class="container-fluid" style="display:none">
                     </div> 
                     <div id="popover_content" class="container-fluid" style="display:none">
-                        <a href="#" class=""><h4 class="navH">Settings</h4></a>
+                        <a href="settings.php" class=""><h4 class="navH">Settings</h4></a>
                         
                         <a href="#" class=""><h4 class="navH">Invite Neighbors</h4></a>
                         <a href="https://goo.gl/forms/3rCEChSCx3Lt5ijd2" class=""><h4 class="navH">Feedback</h4></a>
@@ -142,8 +165,8 @@ if (isset($_POST['searchText']))
                         <li>
                         <div class="review-card" style="width:400px">
                         <div class="review-header">
-                        <img src="images/user-default-gray.png" class="image-circle">
-                        <h2 class="person-name">{$row["username"]}</h2><h3 class="person-desig"> {$row["neighborhood"]}</h3>
+                        <img src="{$row['picture']}" class="image-circle">
+                       <a href="profile.php?user={$row['username']}" style="text-decoration:none"><h2 class="person-name">{$row["username"]}</h2></a><h3 class="person-desig"> {$row["neighborhood"]}</h3>
                     </div></li>
                     </div>
                     <br>
@@ -175,8 +198,8 @@ EOT;
                         <li>
                <div class="review-card">
                     <div class="review-header" value="{$row['id']}">
-                        <image src="images/user-default-gray.png" class="image-circle"></image>
-                        <h2 class="person-name">{$row["owner"]}</h2><h3 class="person-desig"> {$row["neighborhood"]}</h3>
+                        <image src="{$row['picture']}" class="image-circle"></image>
+                        <a href="profile.php?user={$row['owner']}"><h2 class="person-name">{$row["owner"]}</h2></a><h3 class="person-desig"> {$row["neighborhood"]}</h3>
                     </div>
 EOT;
                 if ($row['img_src'] != null)

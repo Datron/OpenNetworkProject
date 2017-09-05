@@ -16,16 +16,18 @@ class User {
     function getFeed(){
         include 'dbconfig.php';
         $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
-        $q = "SELECT * FROM user_posts ORDER BY time DESC LIMIT 0,30";
+        $q = "SELECT * FROM user_posts up,user_settings us WHERE up.owner=us.name ORDER BY time DESC LIMIT 0,30";
         $html;
+        
         if ($result = $mysqli->query($q))
         {
             while ($row = $result->fetch_assoc()){
+                $owner = $row['owner'];
                $html = <<<EOT
                <div class="review-card">
                     <div class="review-header" value="{$row['id']}">
-                        <image src="images/user-default-gray.png" class="image-circle"></image>
-                        <h2 class="person-name">{$row["owner"]}</h2><h3 class="person-desig"> {$row["neighborhood"]}</h3>
+                        <image src="{$row['picture']}" class="image-circle"></image>
+                        <a href="profile.php?user=$owner" style="text-decoration:none"><h2 class="person-name">{$row["owner"]}</h2></a><h3 class="person-desig"> {$row["neighborhood"]}</h3>
                     </div>
 EOT;
                 if ($row['img_src'] != null)

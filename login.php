@@ -11,7 +11,7 @@ if ( isset($_POST["userlogin"]) && isset($_POST["password"]) )
     $userlogin = $mysqli->real_escape_string(htmlentities(stripslashes(strip_tags($_POST["userlogin"]))));
     $password = $mysqli->real_escape_string($_POST["password"]);
     lockTableWrite($table,$mysqli);
-    $query = "SELECT username,email,address,phone,neighborhood,password,picture FROM users WHERE email='$userlogin'";
+    $query = "SELECT username,email,address,phone,neighborhood,password FROM users WHERE email='$userlogin'";
     $result = $mysqli->query($query);
     unlockTable($mysqli);
     $row = $result->fetch_object();
@@ -120,6 +120,10 @@ function userVerified($row){
     $verifyquery = "UPDATE users SET isLoggedIn='1' WHERE username='$row->username'";
     $result1 = $mysqli->query($verifyquery);
     unlockTable($mysqli);
+    $query = "SELECT picture FROM user_settings WHERE name='{$_SESSION['username']}'";
+    $res = $mysqli->query($query);
+    $row = $res->fetch_assoc();
+    $_SESSION['prof_pic'] = $row['picture'];
     header("Location: /mybiarro/home.php"); /* Redirect browser */
     exit;
 }

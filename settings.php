@@ -154,7 +154,7 @@ function getNotifs(){
                 <div class="col-xs-2 col-sm-1 col-md-2">
                 <a href="#" id="nav-menu-button"><i class="material-icons mat-menu">menu</i></a>
                 </div>
-                <form class="nav-form">
+                <form class="nav-form" method="post" action="search.php">
                 <div class="col-xs-10 col-sm-10 col-md-4">
                   <div class="input-group">
                     <input type="text" id="searchField" name="searchText" class="form-control form-field" placeholder="Search">
@@ -172,13 +172,15 @@ function getNotifs(){
                     <ul class="nav navbar-nav topOptions">
                         <li><a href="home.php">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
-                        <li><a href="profile.php">Profile</a></li>
-                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="images/user-default-gray.png" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
+                        <li><a href="profile.php?user=<?php echo $_SESSION['username'] ?>">Profile</a></li>
+                        <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="<?php if(isset($_SESSION['prof_pic'])) 
+                                    echo $_SESSION['prof_pic'];
+                             else echo 'images/user-default-gray.png' ?>" class="image-circle"><?php echo $_SESSION['username'] ?></a></li>
                         </ul>
                     <div id="notifications" class="container-fluid" style="display:none">
                     </div> 
                     <div id="popover_content" class="container-fluid" style="display:none">
-                        <a href="#" class=""><h4 class="navH">Settings</h4></a>
+                        <a href="settings.php" class=""><h4 class="navH">Settings</h4></a>
                         
                         <a href="#" class=""><h4 class="navH">Invite Neighbors</h4></a>
                         <a href="https://goo.gl/forms/3rCEChSCx3Lt5ijd2" class=""><h4 class="navH">Feedback</h4></a>
