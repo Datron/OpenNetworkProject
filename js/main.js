@@ -160,18 +160,84 @@ $(document).ready(function(){
         /*alert(tag);*/
         switch(tag) {
             case 'Pets':
-                $(".jumbotron").append('<div class="tagged tag1">Pets.</div>');
+                $(".dropdownText").html("Pets");
                 break;
             case 'Recommendations':
-                 $(".jumbotron").append('<div class="tagged tag2">Recommendations.</div>');
+                $(".dropdownText").html("Recommendations");
                 break;
             case 'Events':
-                $(".jumbotron").append('<div class="tagged tag3">Events</div>');
+                $(".dropdownText").html("Events");
                 break;
             case 'Classifields':
-                $(".jumbotron").append('<div class="tagged tag4">Classifields</div>');
+                $(".dropdownText").html("Classifields");
                 break;
         }
+    });
+
+    $('.nav-sidebar a').click(function () {
+       var filter = $(this).text();
+       switch (filter){
+           case "pollRecommendations":
+               console.log("Recommd");
+               $.ajax({
+                  method: 'POST',
+                  url: 'refresh_feed.php',
+                  data:{'tag':"Recommendations"}
+               }).done(function (data) {
+                    $('.refresh-feed').empty();
+                    $('.refresh-feed').append(data);
+                   console.log("See recommendations");
+               });
+               break;
+           case "warningCrime and Safety":
+               console.log("Safety");
+               $.ajax({
+                   method: 'POST',
+                   url: 'refresh_feed.php',
+                   data:{'tag':"Crime and Safety"}
+               }).done(function (data) {
+                   $('.refresh-feed').empty();
+                   $('.refresh-feed').append(data);
+                   console.log("See Safety");
+               });
+               break;
+           case "listLost and Found":
+               console.log("found");
+               $.ajax({
+                   method: 'POST',
+                   url: 'refresh_feed.php',
+                   data:{'tag':"Lost and Found"}
+               }).done(function (data) {
+                   $('.refresh-feed').empty();
+                   $('.refresh-feed').append(data);
+                   console.log("See Found");
+               });
+               break;
+           case "perm_identityNeighbors":
+               console.log("Neighbors");
+               $.ajax({
+                   method: 'POST',
+                   url: 'refresh_feed.php',
+                   data:{'tag':"Neigbors"}
+               }).done(function (data) {
+                   $('.refresh-feed').empty();
+                   $('.refresh-feed').append(data);
+                   console.log("See neighbors");
+               });
+               break;
+           case "group_workPublic Agencies":
+               console.log("Public agencies");
+               $.ajax({
+                   method: 'POST',
+                   url: 'refresh_feed.php',
+                   data:{'tag':"Public Agencies"}
+               }).done(function (data) {
+                   $('.refresh-feed').empty();
+                   $('.refresh-feed').append(data);
+                   console.log("See Agencies");
+               });
+               break;
+       }
     });
     
     $("#submitPost").click(function(e){
@@ -183,17 +249,13 @@ $(document).ready(function(){
                 alert("No text entered. Your post will be discarded");
                 return;
             }
-        var tagsput = [];
-        $('.jumbotron').each(function(index, obj)
-            {
-                tagsput.push($(this).text());
-            });
-        console.log(tagsput);
+        var tagsput = $('.dropdownText').text();
+        if (tagsput == "set categories")
+            tagsput = '';
         var postOject = {
             text: postText,
             tags: tagsput
         };
-        var datata = JSON.stringify(postOject);
         $.ajax({
             method: 'POST',
             url: "post.php",
@@ -265,4 +327,28 @@ $(document).ready(function(){
             alert('comment discarded');
     });
 }); // end of document.ready
+$(document).on('click', '.likes', function () {
+    var postId = $(this).val();
+    var count = parseInt($(this).children('.count1').text());
+    $(this).children('.count1').html(++count);
+    $.ajax({
+       method: 'POST',
+       url: 'home.php',
+       data: {'post_id_like':postId,'likeCount':count}
+    }).done(function (data) {
+        console.log(data) ;
+    });
+});
+$(document).on('click', '.comment', function () {
+    var postId = $(this).val();
+    var count = parseInt($(this).children('.count2').text());
+    $(this).children('.count2').html(++count);
+    $.ajax({
+        method: 'POST',
+        url: 'home.php',
+        data: {'post_id_com':postId,'comCount':count}
+    }).done(function (data) {
+        console.log(data);
+    });
+});
 

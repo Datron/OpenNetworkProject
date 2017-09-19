@@ -3,8 +3,16 @@ include 'user.php';
 session_start();
 session_regenerate_id(TRUE); 
 if (!isset($_SESSION['username']))
-    header("Location: mybiarro/index.html");
+    header("Location: /myBiarro/index.html");
 $user = new User();
+if (isset($_POST['post_id_like']) && isset($_POST['likeCount']))
+{
+    $user->handleLikes($_POST['post_id_like'],$_POST['likeCount']);
+}
+if (isset($_POST['post_id_com']) && isset($_POST['comCount']))
+{
+    $user->handleComments($_POST['post_id_com'],$_POST['comCount']);
+}
 ?>
 <html !DOCTYPE>
 <head>
@@ -219,13 +227,13 @@ $user = new User();
             <div class="col-md-1"></div>
             <div class="col-md-2 nav-sidebar well-ff">
                 <h1 class="nav-heading">Categories</h1>
-                <a href="" class=""><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a>
-                <a href="" class=""><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
-                <a href="" class=""><h3 class="navOption"><i class="material-icons">list</i>Lost and Found</h3></a>
+                <a href="#" class=""><h3 class="navOption"><i class="material-icons">poll</i>Recommendations</h3></a href="">
+                <a href="#" class=""><h3 class="navOption"><i class="material-icons">warning</i>Crime and Safety</h3></a>
+                <a href="#" class=""><h3 class="navOption"><i class="material-icons">list</i>Lost and Found</h3></a>
 
                 <h1 class="nav-heading">People</h1>
-                    <a href="" class=""><h3 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h3></a>
-                <a href="" class=""><h3 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h3></a>
+                    <a href="#" class=""><h3 class="navOption"><i class="material-icons">perm_identity</i>Neighbors</h3></a>
+                <a href="#" class=""><h3 class="navOption"><i class="material-icons">group_work</i>Public Agencies</h3></a>
 
             </div>
             <div class="col-md-6 refresh-feed" id="feed">
@@ -236,45 +244,8 @@ $user = new User();
 
     <div class="tab-content" id="user">
         <!-------------------------USER PROFILE UI-------------------------->
-    <div class="container-fluid">
-        <div class="user-basics">
-        <img src="images/user-default-gray.png" class="image-square img-responsive">
-            <h1 class="username"><?php echo $_SESSION['username']?> </h1>
-            <h2><?php echo $_SESSION['neighborhood']?> </h2>
-        </div>
-        <div class="user-info">
-            <div class="col-md-4"></div>
-            <div class="col-md-3">
-        <div class="container">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                    <h3 class="panel-title">About me</h3>
-              </div>
-              <div class="panel-body">
-                    Add an about me.........
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                    <h3 class="panel-title">Interests</h3>
-              </div>
-              <div class="panel-body">
-                    interests
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                    <h3 class="panel-title">recommendations</h3>
-              </div>
-              <div class="panel-body">
-                    Panel content
-              </div>
-            </div>
-            </div>
-        </div>
+    <?php $user->getUserProfile($_SESSION['username']); ?>
     </div>
-    </div>
-        </div>
     <div class="tab-content" id="event">
 
         </div>
@@ -343,12 +314,10 @@ $user = new User();
             </script>
             <br>
 			<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>
-            <div class="jumbotron"></div>
-            <div class="row extraTags">
-                <div class="col-sm-10">
+            <div class="extraTags">
                     <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        set categories
+                      <button class="btn btn-success btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <h6 class="dropdownText">set categories</h6>
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu tags" aria-labelledby="dropdownMenu1">
@@ -358,7 +327,6 @@ $user = new User();
                         <!--<li role="separator" class="divider"></li>-->
                         <li><a href="#">Events</a></li>
                       </ul>
-                    </div>
                 </div>
             </div>
 		</div>

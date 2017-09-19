@@ -1,5 +1,7 @@
 <?php
-/*PHP script to create a post, save it in the table userposts in db mybiarro. It also allows for classifications. */
+/**
+ * PHP script to create a post, save it in the table userposts in db mybiarro. It also allows for classifications.
+ */
 class Post {
     public $post_type;
     public $post_content;
@@ -13,6 +15,10 @@ class Post {
         $this->post_owner = $post_owner;
         $this->post_nbhood = $post_nbhood;
     }
+
+    /**
+     *  Create the post
+     */
     function makePost(){
         include 'dbconfig.php';
          $table = "user_posts";
@@ -22,8 +28,8 @@ class Post {
         }
         lockTableRead($table,$mysqli);
         $this->post_content = $mysqli->real_escape_string($this->post_content);
-        $likes = 50;
-        $comments = 10;
+        $likes = 0;
+        $comments = 0;
         $create_post = "INSERT INTO user_posts (id, type, content, img_src, owner, time, likes, neighborhood, comments) VALUES (NULL, '$this->post_type', '$this->post_content', '$this->post_img', '$this->post_owner',  CURRENT_TIMESTAMP, '$likes', '$this->post_nbhood', '$comments')";
         if($mysqli->query($create_post) == true)
         {
@@ -45,12 +51,12 @@ if(isset($_POST['text']))
         $tags_token = $_POST['tags'];
     else 
         $tags_token = null;
-    $str;
-    foreach ($tags_token as $tag)
-    {
-        $str = $str.$tag;
-    }
-    $post = new Post($str,$_POST['text'],$_SESSION["photo_path"],$_SESSION['username'],$_SESSION['neighborhood']);
+//    $str;
+//    foreach ($tags_token as $tag)
+//    {
+//        $str = $str.$tag;
+//    }
+    $post = new Post($tags_token,$_POST['text'],$_SESSION["photo_path"],$_SESSION['username'],$_SESSION['neighborhood']);
     $post->makePost();
 }
 else

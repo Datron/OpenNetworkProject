@@ -112,7 +112,7 @@ if (isset($_POST['searchText']))
                 <nav class="navbar mynav">
                     <div class="container-fluid">
                     <ul class="nav navbar-nav topOptions">
-                        <li class="active"><a href="">Home</a></li>
+                        <li><a href="home.php">Home</a></li>
                         <li><a href="#" class="notifsPopover" title="notifcations" data-toggle="popover" data-trigger="click" data-placement="bottom"><i class="material-icons">notifications</i><span class="badge"></span></a></li>
                         <li><a href="profile.php?user=<?php echo $_SESSION['username'] ?>">Profile</a></li>
                         <li><a href="#" class="settingsPopover" title="<?php echo $_SESSION['neighborhood'] ?>" data-toggle="popover" data-trigger="click" data-placement="bottom"><img src="<?php if(isset($_SESSION['prof_pic'])) 
@@ -167,9 +167,9 @@ if (isset($_POST['searchText']))
                         <div class="review-header">
                         <img src="{$row['picture']}" class="image-circle">
                        <a href="profile.php?user={$row['username']}" style="text-decoration:none"><h2 class="person-name">{$row["username"]}</h2></a><h3 class="person-desig"> {$row["neighborhood"]}</h3>
-                    </div></li>
                     </div>
-                    <br>
+                    </div>
+                    </li>
 EOT;
                         }
                     }

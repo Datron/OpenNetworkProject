@@ -379,9 +379,13 @@ ul {
 .likes {
             float: left;
             padding: 10px;
+            margin-bottom: 0px;
+            background: transparent;
         }
 .comment {
             padding: 10px;
+            margin-bottom: 0px;
+            background: transparent;
         }
 .single-comment {
 /*            border-bottom: 1px solid black;*/
@@ -446,6 +450,29 @@ ul {
 }
 .read:hover {
     background: #eeeeee;
+}
+.username {
+    font-weight: 700;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+.person-desig {
+    position: relative;
+    font-size: 20px;
+    bottom: 20px;
+    left: 20px;
+    font-family: 'Ubuntu',sans-serif;
+    font-weight: 600;
+    color: white;
+}
+.user-basics {
+    text-align: center;
+}
+.user-info {
+}
+.user-info .panel {
+    max-width: 400px;
 }
 @media screen and (max-width:450px)
 {

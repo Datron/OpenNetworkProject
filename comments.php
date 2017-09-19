@@ -3,7 +3,7 @@ include 'dbconfig.php';
 $table = "comments";
 session_start();
 if (!isset($_SESSION['username']))
-    header("Location: mybiarro/index.html");
+    header("Location: /index.html");
 $mysqli = new mysqli($db_hostname,$db_username,$db_password,$db_database);
 if ($mysqli->connect_error) {
             die("Connection failed: " . $mysqli->connect_error);

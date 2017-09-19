@@ -31,6 +31,11 @@ if (isset($_POST['firstname']) && isset($_POST['zip']))
     else{
         echo $mysqli->error;
     }
+    $query = "INSERT INTO user_settings(name,about,interests,recommendations,email_verified,address_verified,invited,picture) VALUES($name,'about me','interests','recommendations',0,0,0,'images/user-default-gray.png')";
+    if (!$mysqli->query($query))
+    {
+        echo "query failed ".$mysqli->error;
+    }
 }
 ?>
 <html DOCTYPE!>

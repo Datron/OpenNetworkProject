@@ -112,78 +112,19 @@
     <div class="modal-content">
       <div class="modal-body" style="height:500px">
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Message</a></li>
+            <li class="active"><a data-toggle="tab" href="#home1">Message</a></li>
             <li><a data-toggle="tab" href="#menu1">Event</a></li>
             <li><a data-toggle="tab" href="#menu2">Alert</a></li>
             <li style="float:right;padding:10px"><button type="button" class="close" data-dismiss="modal">&times;</button></li>
         </ul>
           <div class="tab-content">
-            <div id="home" class="tab-pane active">
-              <form class="form" id="post-form" role="form">
-		<div class="form-group postform">
-            <div id="uploader"></div>
-            <script>
-            var galleryUploader = new qq.FineUploader({
-            element: document.getElementById("uploader"),
-            template: 'qq-template',
-            request: {
-            endpoint: "endpoint.php"
-                },
-                deleteFile: {
-                    enabled: true,
-                    endpoint: "endpoint.php"
-                },
-                chunking: {
-                    enabled: true,
-                    concurrent: {
-                        enabled: true
-                    },
-                    success: {
-                        endpoint: "endpoint.php?done"
-                    }
-                },
-                resume: {
-                    enabled: true
-                },
-                retry: {
-                    enableAuto: true,
-                    showButton: true
-                },
-                    thumbnails: {
-                        placeholders: {
-                            waitingPath: 'fine-uploader/placeholders/waiting-generic.png',
-                            notAvailablePath: 'fine-uploader/placeholders/not_available-generic.png'
-                        }
-                    },
+            <div id="home1" class="tab-pane active">
+                <!--<div class="container-fluid">-->
+                    <!--<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>-->
+                <!--</div>-->
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-                    validation: {
-                        allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
-                    },
-                    debug: true
-                });
-            </script>
-            <br>
-			<textarea class="form-control" rows="6" placeholder="what's happening?" id="postarea"></textarea>
-            
-            <div class="row extraTags">
-                <div class="col-sm-10">
-                    <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        set categories
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu tags" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Pets</a></li>
-                        <li><a href="#">Recommendations</a></li>
-                        <li><a href="#">Classifields</a></li>
-                        <!--<li role="separator" class="divider"></li>-->
-                        <li><a href="#">Events</a></li>
-                      </ul>
-                    </div>
-                </div>
-            </div>
-		</div>
-          </form>
             </div>
             <div id="menu1" class="tab-pane fade">
               <h3>Menu 1</h3>
