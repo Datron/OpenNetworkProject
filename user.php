@@ -248,27 +248,11 @@ EOT;
             <div class="row">
                 <div class="col-md-1"></div>
             <div class="col-md-5">
-                <form action="" method="POST" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <legend>Name</legend>
-                        <div class="row">
-                         <div class="col-md-6">
-                             <input type="text" id="new-firstname" class="form-control" value="" required="required">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" id="new-lastname" class="form-control" value="" required="required">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <legend>email</legend>
+                <form action="settings.php" method="POST" class="form-horizontal" role="form">
 
-                        <input type="email" id="new-email" class="form-control" value="" required="required">
-                    </div>
-                    
                     <div class="form-group">
                         <legend>Profile picture</legend>
-                        <img src="images/user-default-gray.png" class="user-profile-pic img-responsive">
+                        <img src="{$_SESSION['prof_pic']}" class="user-profile-pic img-responsive">
                         <br><br>
                     <input type="file" class="filesup" style="display:none">
                     <button type="button" class="btn btn-success">Upload New</button>
@@ -290,15 +274,11 @@ EOT;
             </form>
                 </div>
             </div>
-            
+
 
         </div>
 EOT;
         echo $html;
-    }
-    
-    function setUserSettings(){
-        //new user settings updated here
     }
 }
 ?>
