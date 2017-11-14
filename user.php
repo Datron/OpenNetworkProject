@@ -35,7 +35,7 @@ EOT;
                     <p class="person-review"> {$row['content']} </p>
                     <div class="toolbar">
                     <button class="btn likes" value="{$row['id']}"><i class="material-icons">thumb_up</i><div class="count1">{$row['likes']}</div></button>
-                    <button class="btn comment" value="{$row['id']}"><i class="material-icons">chat</i><div class="count2">{$row['comments']}</div></button>
+                    <button class="btn comment" value="{$row['id']}"><i class="material-icons">chat</i><div class="">comments</div></button>
                     </div>
                     <div class="comments-area">
 EOT;

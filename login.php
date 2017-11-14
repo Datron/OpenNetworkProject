@@ -124,7 +124,7 @@ function userVerified($row){
     $res = $mysqli->query($query);
     $row = $res->fetch_assoc();
     $_SESSION['prof_pic'] = $row['picture'];
-    header("Location: /mybiarro/home.php"); /* Redirect browser */
+    header("Location: /home.php"); /* Redirect browser */
     exit;
 }
 function wrongCred(){
