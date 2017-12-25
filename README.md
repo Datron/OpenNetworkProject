@@ -6,6 +6,12 @@ A demo is provided above somewhere.
 
 Fine Uploader
 
+## Creator Notes
+
+    1) Notifications are not actionable.
+    2) You have to download Fine Uploader seperately.
+    3) Do as you wish with ONP, as long as you credit the author.(Unless it's something terrible, in which case leave my name out of it.)
+    
 # License
 
 Copyright 2017 [Datron]
