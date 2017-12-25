@@ -121,26 +121,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `phone`, `address`, `neighborhood`) VALUES
-(1, 'Kartik Gajendra', '$2y$10$5QTEShMFOZhB3JhaChdPk.hlXsjzWnivtYgA30BjmZAn1mVMIKBhG', 'kartik123@gmail.com', '7786', '134,3a', 'kasturinagar'),
-(2, 'Kartik lol', '$2y$10$fe2CUFrX0ETPt6tUH/rstOqNAppqGRF0nt/KQX8ruU9yu8p9y0/mK', 'kartik@gmail.com', '9986923981', 'ssss,Bangalore,Karnataka,560043', 'Kasturinagar'),
-(3, 'Ramu Kakaa', '$2y$10$lLKeyNBlK2HcWif0ouH.JekXcXvI2lezBIJIExkR4Y5zrjMNOi04u', 'ramu@gmail.com', '', ',,', 'C.V Ramanagar'),
-(4, 'John Cena', '$2y$10$4ghKF.zET.PucZU/yItYr.HwfG.hXxBg2XPzBQN53mlCTu39lw/Ta', 'johncena@gmail.com', '98172212312', 'lol,lol,lol,560021', 'washington'),
-(5, 'Abhi Mitra', '$2y$10$W0vhBHw1c2icxGFoYYjc6uZKJGZUzNEB9eVHvHgnmJEp8OlN.jyXG', 'Abhishek.mit@gmail.com ', '11', 'Ju,Sp,04088002', '896 alameida jurupis'),
-(6, 'Indranil SARKAR', '$2y$10$2kdcj1ZlAft3Fssnd5UA4eHRu/60CkToI7xs8UMGruFCbcRQLhc2K', 'indranil1741997@gmail.com', '8904129612', '#31,2nd cross,govinayakahalli,beangaluru,karanataka,560078', 'Kumaraswamy Layout'),
-(7, 'Uma Shankari', '$2y$10$a7K7aFFbI.7sojFg6EeSo.qholL9ZrQ.2/ZLKHRbMhJZOu16Bn4rG', 'umashankari1909@gmail.com', '99977577543', 'D 18/4,DRDO Quarters,PHASE-1,Bangalore,Karnataka,560093', 'Kasturinagar'),
-(8, 'NTIHIN KATTA', '$2y$10$5yh.SokQQZfL6fiR78qeEuY.w6ZwNLkCCDDw.hPj8j388txYo/YIu', 'Kattanithin323@gmail.com', '7659082791', 'malakala hostel,basavanagudi,gavipuram extension,bangalore , karnataka,560019', 'Basavanagudi'),
-(9, 'Nitin Saini', '$2y$10$BmejitJHcladjc.bADzI8O8Egr54tGd8QLpHfzUXRIKcS8TcMmWLG', 'nitinsaini2909@gmail.com', '7737639455', 'No. 4, pilliyar koil street,Nr. metal fashion shop, potheri,603203', 'Potheri'),
-(10, 'Soumya Deb', '$2y$10$GnHMBVKns5tw4Fca4Qd.ZOh9rWNn3PvSgRZT7vWCPGIQp6robffE6', '1504060@kiit.ac.in', '9714171477', 'oinedo,Delhi,110012', 'Andu ka takla'),
-(11, 'Sathvik Raghavendra', '$2y$10$t260ieYmGIxFjD0BJXRxGOlfRK0fefWpJjclbgMzIj0SO77QYBxKW', 'sathvikraghavendra9@gmail.com', '8331881044', 'Chaitanya nagar,Anantapur,Andrea pradesh,515201', 'Hindupur'),
-(12, 'NITHIN J N', '$2y$10$mzFnaJ7Flxxd1LdMUKRieeqV3xY.Lt.pOz05setkoaJVPHn0RGC7q', 'jayamnithin27@gmail.com', '8374502656', 'SLV PG,near MVJ COLLEGE OF ENGINEERING.,Bangalore,560067', 'Neigbourhood'),
-(13, 'Balaji BN', '$2y$10$yyHDdy2wsuLvoA7SwO/QTuOC7hODZIx/D5kiWHLmUrgW/qdt8I5MO', 'balajisetty1998@gmail.com', '7022562383', 'Malakala Hostel,BANGALORE, KARNATAKA,560019', 'Neigbourhood'),
-(14, 'Niranjan P R', '$2y$10$CV7l7ym7oD/HVjKZ3QAFAuBK7fbTFLw99nhe.uuURJ5o1gGvyZ7sS', 'prniranjan1998@gmail.com', '8748811023', 'Malakala hostel,Bangalore,560019', 'Bangalore'),
-(15, 'vishnu reddy', '$2y$10$FdYcs9jEEiPI48x3awlWm.LzINMPorfO7Rrx0Jj5dj35M9Fx64V5.', 'vishnugopalreddy007@gmail.com', '7795256521', 'malakala hostel,#2,3d cross,bangalore,560019', 'bangalore'),
-(16, 'suraj parsam', '$2y$10$.Aji25RBGsivMrtyT/nBvehxJqE30bZ22lj7TxRSJUi9r0SHhgoq2', 'surajparsam33@gmail.com', '7386916669', 'malakala hostel #2 3d cross 1st main gavipuram extension ,bangalore karnataka,560019', 'bangalore'),
-(17, 'Raghavendra T M', '$2y$10$iDF9C7BztIwLotLT0Yu0Tu2q3MR.qcz3yhzGlWZrPLTQvTF7klyJy', 'raghavendratm567@gmail.com', '8861588716', 'Malakala hostel,Bangalore,560019', 'Bangalore'),
-(18, 'Hemanth C', '$2y$10$qyYY2YvxiZurozpB6my26.2kh1IF8b2OUcB6k7YlpSJnU6epTdhC2', 'hemanthvenki910@gmail.com', '9632196348', 'Malakala hostel,Bangalore,560019', 'Bangalore');
-
 -- --------------------------------------------------------
 
 --
