@@ -3,7 +3,7 @@ include 'user.php';
 session_start();
 session_regenerate_id(TRUE); 
 if (!isset($_SESSION['username']))
-    header("Location: /index.html");
+    header("Location: ./index.html");
 $user = new User();
 if (isset($_POST['post_id_like']) && isset($_POST['likeCount']))
 {
